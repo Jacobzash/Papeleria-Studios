@@ -1,2 +1,3 @@
 # Papeleria-Studios
-Proyecto académico, realización software de inventario y ventas para la papelería Estudios
+Proyecto académico para la realización de un software de inventario y ventas para la papelería Estudios
+ 
