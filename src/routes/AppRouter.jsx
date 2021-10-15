@@ -10,6 +10,7 @@ import { CssBaseline } from "@material-ui/core";
 
 import { Footer } from "../components/Footer/Footer";
 import { Header } from "../components/Header/Header";
+import { Admin } from "../pages/Admin";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,7 @@ export const AppRouter = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/admin" component={Admin} />
           </Switch>
         </main>
         <Footer />
