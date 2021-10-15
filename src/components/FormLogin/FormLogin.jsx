@@ -14,6 +14,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
+import { Notification } from "../Others/Notification";
+import { Redirect } from "react-router";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -37,6 +40,17 @@ const useStyles = makeStyles((theme) => ({
 export default function FormLogin() {
   const classes = useStyles();
   const [showPassword, setshowPassword] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    variant: "",
+  });
+
+  if (redirect) {
+    return <Redirect to="/admin" />;
+  }
+
   const handleClickShowPassword = () => {
     setshowPassword(!showPassword);
   };
@@ -45,7 +59,15 @@ export default function FormLogin() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    setAlert({
+      ...alert,
+      open: true,
+      message: "Inicio de sesión satisfactorio, redirigiendo",
+      variant: "success",
+    });
+    setRedirect(true);
   };
+
   return (
     <Container component="div" maxWidth="sm">
       <div className={classes.paper}>
@@ -105,6 +127,12 @@ export default function FormLogin() {
             Iniciar sesión
           </Button>
         </form>
+        <Notification
+          open={alert.open}
+          message={alert.message}
+          variant={alert.variant}
+          setOpen={setAlert}
+        />
       </div>
     </Container>
   );
