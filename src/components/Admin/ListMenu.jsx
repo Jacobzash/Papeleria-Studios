@@ -7,6 +7,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
+import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 
 export const ListMenu = ({ handleDrawerClose }) => {
   return (
@@ -22,6 +23,12 @@ export const ListMenu = ({ handleDrawerClose }) => {
           <CreateIcon />
         </ListItemIcon>
         <ListItemText primary="Productos" />
+      </ListItem>
+      <ListItem button onClick={handleDrawerClose}>
+        <ListItemIcon>
+          <LocalShippingIcon />
+        </ListItemIcon>
+        <ListItemText primary="Proveedores" />
       </ListItem>
       <ListItem button onClick={handleDrawerClose}>
         <ListItemIcon>
