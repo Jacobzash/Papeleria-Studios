@@ -49,7 +49,7 @@ const rows = [
   createData(
     356,
     "Borradores",
-    "Borradores para borrar los malos recuerdos :("
+    "Borradores para borrar los malos recuerdos :( Borradores para borrar los malos recuerdos :( Borradores para borrar los malos recuerdos :( Borradores para borrar los malos recuerdos :( Borradores para borrar los malos recuerdos :( Borradores para borrar los malos recuerdos :("
   ),
   createData(
     357,
@@ -105,7 +105,7 @@ export const TableCategorias = () => {
               <TableCell align="left">{row.nombre}</TableCell>
               <TableCell align="left">{row.descripcion}</TableCell>
               <TableCell align="left">
-                <ButtonEditCategoria />
+                <ButtonEditCategoria data={row} />
               </TableCell>
               <TableCell align="left">
                 <ButtonDeleteCategoria />
