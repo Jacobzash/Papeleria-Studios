@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -7,8 +7,20 @@ import SearchIcon from "@material-ui/icons/Search";
 import { AddCategoria } from "./AddCategoria";
 
 export const InputSearch = () => {
+  const [input, setInput] = useState({
+    search: "",
+  });
+  const handleChange = ({ target }) => {
+    setInput({
+      ...input,
+      [target.name]: target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Grid
         container
         direction="row"
@@ -22,6 +34,8 @@ export const InputSearch = () => {
             label="Buscar..."
             margin="normal"
             name="search"
+            onChange={handleChange}
+            value={input.search}
             fullWidth
             variant="outlined"
             InputProps={{
