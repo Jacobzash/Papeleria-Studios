@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
 
-export const FormCategoria = ({ handleSubmit, data, mode }) => {
-  const [dataCategoria] = useState(data);
+export const FormCategoria = ({
+  dataCategoria,
+  setDataCategoria,
+  handleSubmit,
+  data,
+  mode,
+}) => {
+  const handleChange = ({ target }) => {
+    setDataCategoria({
+      ...dataCategoria,
+      [target.name]: target.value,
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -12,7 +23,8 @@ export const FormCategoria = ({ handleSubmit, data, mode }) => {
         fullWidth
         label="Nombre"
         margin="normal"
-        value={mode === "edit" ? dataCategoria.nombre : ""}
+        onChange={handleChange}
+        defaultValue={mode === "edit" ? dataCategoria.nombre : ""}
         name="nombre"
         required
         variant="outlined"
@@ -25,7 +37,8 @@ export const FormCategoria = ({ handleSubmit, data, mode }) => {
         label="Descripción"
         multiline
         margin="normal"
-        value={mode === "edit" ? dataCategoria.descripcion : ""}
+        onChange={handleChange}
+        defaultValue={mode === "edit" ? dataCategoria.descripcion : ""}
         name="descripcion"
         required
         variant="outlined"
