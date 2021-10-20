@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -20,13 +20,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export const ModalCategorias = ({ open, setOpen, mode, data }) => {
+  const [dataCategoria, setDataCategoria] = useState(data);
   const classes = useStyles();
   const handleClose = () => {
     setOpen(false);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hola");
+    console.log(dataCategoria);
     handleClose();
   };
   return (
@@ -48,7 +49,13 @@ export const ModalCategorias = ({ open, setOpen, mode, data }) => {
           </IconButton>
         </div>
         <DialogContent dividers>
-          <FormCategoria handleSubmit={handleSubmit} data={data} mode={mode} />
+          <FormCategoria
+            dataCategoria={dataCategoria}
+            setDataCategoria={setDataCategoria}
+            handleSubmit={handleSubmit}
+            data={data}
+            mode={mode}
+          />
         </DialogContent>
         <DialogActions className={classes.actions}>
           <Button
