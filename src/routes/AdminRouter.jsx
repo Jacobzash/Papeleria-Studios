@@ -4,13 +4,15 @@ import { Categorias } from "../pages/Admin/Categorias";
 import { Admin } from "../pages/Admin";
 import { Error404 } from "../pages/Error404";
 import { Proveedores } from "../pages/Admin/Proveedores";
+import { Productos } from "../pages/Admin/Productos";
+
 export const AdminRouter = () => {
   return (
     <>
       <Switch>
         <Route exact path="/admin" component={Admin} />
         <Route exact path="/admin/categorias" component={Categorias} />
-        <Route exact path="/admin/productos" component={Categorias} />
+        <Route exact path="/admin/productos" component={Productos} />
         <Route exact path="/admin/proveedores" component={Proveedores} />
         <Route exact path="/admin/inventario" component={Categorias} />
         <Route exact path="/admin/ventas" component={Categorias} />
