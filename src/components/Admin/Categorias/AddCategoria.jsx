@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import { ModalCategorias } from "./ModalCategorias";
+import { ModalCategoria } from "./ModalCategoria";
 
 export const AddCategoria = () => {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ export const AddCategoria = () => {
       >
         Agregar
       </Button>
-      <ModalCategorias open={open} setOpen={setOpen} />
+      <ModalCategoria open={open} setOpen={setOpen} />
     </>
   );
 };

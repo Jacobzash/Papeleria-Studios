@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import { makeStyles } from "@material-ui/core/styles";
-import { ModalCategorias } from "./ModalCategorias";
+import { ModalCategoria } from "./ModalCategoria";
 
 const useStyles = makeStyles({
   buttonEdit: {
@@ -21,7 +21,7 @@ export const ButtonEditCategoria = ({ data }) => {
       <IconButton onClick={openModal} classes={{ label: classes.buttonEdit }}>
         <EditIcon />
       </IconButton>
-      <ModalCategorias mode="edit" data={data} open={open} setOpen={setOpen} />
+      <ModalCategoria mode="edit" data={data} open={open} setOpen={setOpen} />
     </>
   );
 };

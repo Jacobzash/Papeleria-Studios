@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
 }));
-export const ModalCategorias = ({ open, setOpen, mode, data }) => {
+export const ModalCategoria = ({ open, setOpen, mode, data }) => {
   const [dataCategoria, setDataCategoria] = useState(data);
   const classes = useStyles();
   const handleClose = () => {
