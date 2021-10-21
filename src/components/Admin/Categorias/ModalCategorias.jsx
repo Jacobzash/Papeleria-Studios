@@ -15,9 +15,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  [theme.breakpoints.down("xs")]: {
-    actions: {},
-  },
 }));
 export const ModalCategorias = ({ open, setOpen, mode, data }) => {
   const [dataCategoria, setDataCategoria] = useState(data);

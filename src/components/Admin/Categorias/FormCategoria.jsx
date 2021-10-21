@@ -30,8 +30,6 @@ export const FormCategoria = ({
         variant="outlined"
       />
       <TextField
-        autoComplete="user"
-        autoFocus
         color="secondary"
         fullWidth
         label="Descripción"
