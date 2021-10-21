@@ -1,8 +1,8 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { TableCategorias } from "../../components/Admin/Categorias/TableCategorias";
 import { InputSearchProveedor } from "../../components/Admin/Proveedores/InputSearchProveedor";
+import { TableProveedores } from "../../components/Admin/Proveedores/TableProveedores";
 
 export const Proveedores = () => {
   return (
@@ -12,7 +12,7 @@ export const Proveedores = () => {
       </Typography>
       <Container component="div" maxWidth="lg">
         <InputSearchProveedor />
-        <TableCategorias />
+        <TableProveedores />
       </Container>
     </>
   );
