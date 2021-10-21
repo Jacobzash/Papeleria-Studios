@@ -32,7 +32,6 @@ export const FormProveedor = ({
         color="secondary"
         fullWidth
         label="Contacto"
-        multiline
         margin="normal"
         onChange={handleChange}
         defaultValue={mode === "edit" ? dataProveedor.contacto : ""}
