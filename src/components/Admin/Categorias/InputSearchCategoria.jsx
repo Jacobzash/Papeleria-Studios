@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import { AddProveedor } from "../Proveedores/AddProveedor";
+import { AddCategoria } from "./AddCategoria";
 
 export const InputSearchCategoria = () => {
   const [input, setInput] = useState({
@@ -50,7 +50,7 @@ export const InputSearchCategoria = () => {
           />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <AddProveedor />
+          <AddCategoria />
         </Grid>
       </Grid>
     </form>
