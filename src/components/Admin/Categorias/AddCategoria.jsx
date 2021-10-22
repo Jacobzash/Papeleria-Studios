@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { ModalCategoria } from "./ModalCategoria";
 
-export const AddCategoria = () => {
+export const AddCategoria = ({ mode }) => {
   const [open, setOpen] = useState(false);
   const openModal = () => {
     setOpen(true);
@@ -14,10 +14,10 @@ export const AddCategoria = () => {
         variant="contained"
         color="primary"
         fullWidth
-        endIcon={<AddIcon />}
+        endIcon={mode === "icon" ? "" : <AddIcon />}
         onClick={openModal}
       >
-        Agregar
+        {mode === "icon" ? <AddIcon /> : "Agregar"}
       </Button>
       <ModalCategoria open={open} setOpen={setOpen} />
     </>
