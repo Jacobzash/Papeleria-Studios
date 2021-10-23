@@ -1,4 +1,6 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -9,6 +11,12 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { AddCategoria } from "../Categorias/AddCategoria";
 import { AddProveedor } from "../Proveedores/AddProveedor";
 
+const useStyles = makeStyles((theme) => ({
+  displayNone: {
+    display: "none",
+  },
+}));
+
 export const FormProducto = ({
   dataProducto,
   setDataProducto,
@@ -16,11 +24,18 @@ export const FormProducto = ({
   data,
   mode,
 }) => {
+  const classes = useStyles();
   const handleChange = ({ target }) => {
     setDataProducto({
       ...dataProducto,
       [target.name]: target.value,
     });
+  };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      console.log(file);
+    }
   };
   const matches = useMediaQuery("(min-width:600px)");
 
@@ -118,6 +133,26 @@ export const FormProducto = ({
             required
             variant="outlined"
           />
+        </Grid>
+        <Grid item xs={12}>
+          <input
+            accept="image/*"
+            className={classes.displayNone}
+            id="contained-button-file"
+            name="imgProducto"
+            onChange={handleFileChange}
+            type="file"
+          />
+          <label htmlFor="contained-button-file">
+            <Button
+              variant="contained"
+              fullWidth
+              color="primary"
+              component="span"
+            >
+              Subir Imagen
+            </Button>
+          </label>
         </Grid>
       </Grid>
     </form>
