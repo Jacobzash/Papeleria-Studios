@@ -15,7 +15,24 @@ export const signInApi = async (correo, password) => {
     if (error.response) {
       return error.response.data;
     } else {
-      // Something happened in setting up the request that triggered an Error
+      return error.message;
+    }
+  }
+};
+
+export const refreshTokenApi = async (token) => {
+  const url = `${urlBase}/auth/refreshToken`;
+  const headers = {
+    "Content-Type": "application/json",
+    "x-token": token,
+  };
+  try {
+    const response = await axios.post(url, {}, { headers });
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    } else {
       return error.message;
     }
   }
