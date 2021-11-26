@@ -17,6 +17,8 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { Notification } from "../Others/Notification";
 import { Redirect } from "react-router";
 
+import { signIn } from "../../services/auth";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -39,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormLogin() {
   const classes = useStyles();
+  const [formValues, setFormValues] = useState({
+    correo: "",
+    password: "",
+  });
+
   const [showPassword, setshowPassword] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [alert, setAlert] = useState({
@@ -57,15 +64,33 @@ export default function FormLogin() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setAlert({
-      ...alert,
-      open: true,
-      message: "Inicio de sesión satisfactorio, redirigiendo",
-      variant: "success",
+
+  const handleChange = ({ target }) => {
+    setFormValues({
+      ...formValues,
+      [target.name]: target.value,
     });
-    setRedirect(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await signIn(formValues);
+    if (!response.ok) {
+      console.log("false");
+      setAlert({
+        open: true,
+        message: response.msg,
+        variant: "error",
+      });
+    } else if (response.ok) {
+      setAlert({
+        ...alert,
+        open: true,
+        message: response.msg,
+        variant: "success",
+      });
+      setRedirect(true);
+    }
   };
 
   return (
@@ -79,13 +104,15 @@ export default function FormLogin() {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
-            autoComplete="user"
+            autoComplete="email"
             autoFocus
             color="secondary"
             fullWidth
-            label="Usuario"
+            label="Correo"
             margin="normal"
-            name="user"
+            onChange={handleChange}
+            value={formValues.correo}
+            name="correo"
             required
             variant="outlined"
           />
@@ -94,6 +121,8 @@ export default function FormLogin() {
             fullWidth
             label="Contraseña"
             margin="normal"
+            onChange={handleChange}
+            value={formValues.password}
             name="password"
             required
             variant="outlined"
