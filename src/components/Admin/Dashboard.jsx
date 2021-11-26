@@ -52,7 +52,7 @@ export const Dashboard = () => {
           </Hidden>
           <Hidden smDown>
             <Link to="/login">
-              <Button color="inherit">Login</Button>
+              <Button color="inherit">Panel</Button>
             </Link>
           </Hidden>
         </Toolbar>

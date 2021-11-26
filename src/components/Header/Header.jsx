@@ -40,7 +40,7 @@ export const Header = () => {
         </Hidden>
         <Hidden smDown>
           <Link to="/login">
-            <Button color="inherit">Login</Button>
+            <Button color="inherit">Cerrar sesion</Button>
           </Link>
         </Hidden>
       </Toolbar>
