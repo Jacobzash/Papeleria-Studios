@@ -15,7 +15,6 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 import { Notification } from "../Others/Notification";
-import { Redirect } from "react-router";
 
 import { signIn } from "../../services/auth";
 
@@ -47,16 +46,11 @@ export default function FormLogin() {
   });
 
   const [showPassword, setshowPassword] = useState(false);
-  const [redirect, setRedirect] = useState(false);
   const [alert, setAlert] = useState({
     open: false,
     message: "",
     variant: "",
   });
-
-  if (redirect) {
-    return <Redirect to="/admin" />;
-  }
 
   const handleClickShowPassword = () => {
     setshowPassword(!showPassword);
@@ -89,8 +83,7 @@ export default function FormLogin() {
         message: response.msg,
         variant: "success",
       });
-      window.location.href = "/";
-      setRedirect(true);
+      window.location.href = "/admin";
     }
   };
 
