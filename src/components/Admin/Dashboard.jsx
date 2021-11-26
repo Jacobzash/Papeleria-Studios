@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +11,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { Link } from "react-router-dom";
 import { DrawerAdmin } from "./DrawerAdmin";
+
+import { AuthContext } from "../../context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   toolBar: {
@@ -29,9 +31,12 @@ export const Dashboard = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const { logout } = useContext(AuthContext);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   return (
     <>
       <AppBar position="static">
@@ -51,9 +56,14 @@ export const Dashboard = () => {
             </IconButton>
           </Hidden>
           <Hidden smDown>
-            <Link to="/login">
-              <Button color="inherit">Panel</Button>
-            </Link>
+            <div>
+              <Link to="/admin">
+                <Button color="inherit">Panel</Button>
+              </Link>
+              <Link to="/login" onClick={logout}>
+                <Button color="inherit">Cerrar sesión</Button>
+              </Link>
+            </div>
           </Hidden>
         </Toolbar>
       </AppBar>
