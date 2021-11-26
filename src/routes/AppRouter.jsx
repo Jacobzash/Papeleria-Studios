@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Home } from "../pages/Home";
@@ -17,6 +17,8 @@ import { AdminRouter } from "./AdminRouter";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { Error404 } from "../pages/Error404";
+import { AuthContext } from "../context/AuthContext";
+import getToken from "../utils/getToken";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const AppRouter = () => {
   const classes = useStyles();
-  const user = true;
+  const { auth, checkToken } = useContext(AuthContext);
+  useEffect(() => {
+    checkToken();
+  }, []);
+  if (auth.loading) return <div>Loading...</div>;
   return (
     <Router>
       <ScrollToTop />
@@ -45,21 +51,21 @@ export const AppRouter = () => {
           <CssBaseline />
           <Switch>
             <PublicRoute
-              isLoggedIn={user}
+              isLoggedIn={auth.logged}
               restricted={false}
               exact
               path="/"
               component={Home}
             />
             <PublicRoute
-              isLoggedIn={user}
+              isLoggedIn={auth.logged}
               restricted={true}
               exact
               path="/login"
               component={Login}
             />
             <PrivateRoute
-              isLoggedIn={user}
+              isLoggedIn={auth.logged}
               path="/admin"
               component={AdminRouter}
             />
