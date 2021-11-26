@@ -76,19 +76,20 @@ export default function FormLogin() {
     e.preventDefault();
     const response = await signIn(formValues);
     if (!response.ok) {
-      console.log("false");
       setAlert({
         open: true,
         message: response.msg,
         variant: "error",
       });
     } else if (response.ok) {
+      localStorage.setItem("token", response.token);
       setAlert({
         ...alert,
         open: true,
         message: response.msg,
         variant: "success",
       });
+      window.location.href = "/";
       setRedirect(true);
     }
   };
