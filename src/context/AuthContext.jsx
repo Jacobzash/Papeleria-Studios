@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useCallback } from "react";
+import React, { useState, createContext, useCallback } from "react";
 import { refreshTokenApi } from "../api/auth";
 import getToken from "../utils/getToken";
 
@@ -22,32 +22,32 @@ export const AuthProvider = ({ children }) => {
   // eslint-disable-next-line
   const checkToken = useCallback(async () => {
     const token = getToken();
-    if(!token){
-      setAuth({
-        loading: false,
-        logged: false,
-      })
-      return false
-    }
-    else{
-    const response = await refreshTokenApi(token);
-    if (response.ok) {
-      const { user, token } = response;
-      localStorage.setItem("token", token);
-      setAuth({
-        loading: false,
-        logged: true,
-        nombre: user.nombre,
-        correo: user.correo,
-      });
-      return true;
-    } else {
+    if (!token) {
       setAuth({
         loading: false,
         logged: false,
       });
       return false;
-    }}
+    } else {
+      const response = await refreshTokenApi(token);
+      if (response.ok) {
+        const { user, token } = response;
+        localStorage.setItem("token", token);
+        setAuth({
+          loading: false,
+          logged: true,
+          nombre: user.nombre,
+          correo: user.correo,
+        });
+        return true;
+      } else {
+        setAuth({
+          loading: false,
+          logged: false,
+        });
+        return false;
+      }
+    }
   });
 
   return (

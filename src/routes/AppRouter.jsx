@@ -18,7 +18,6 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { Error404 } from "../pages/Error404";
 import { AuthContext } from "../context/AuthContext";
-import getToken from "../utils/getToken";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +38,7 @@ export const AppRouter = () => {
   const { auth, checkToken } = useContext(AuthContext);
   useEffect(() => {
     checkToken();
+    //eslint-disable-next-line
   }, []);
   if (auth.loading) return <div>Loading...</div>;
   return (
