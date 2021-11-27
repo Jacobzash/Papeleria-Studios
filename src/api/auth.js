@@ -1,10 +1,10 @@
 import axios from "axios";
 import { apiVersion, basePath } from "./config";
 
-const urlBase = `${basePath}/${apiVersion}`;
+const urlBase = `${basePath}/${apiVersion}/auth`;
 
 export const signInApi = async ({ correo, password }) => {
-  const url = `${urlBase}/auth/signIn`;
+  const url = `${urlBase}/signIn`;
   const headers = {
     "Content-Type": "application/json",
   };
@@ -21,7 +21,7 @@ export const signInApi = async ({ correo, password }) => {
 };
 
 export const refreshTokenApi = async (token) => {
-  const url = `${urlBase}/auth/refreshToken`;
+  const url = `${urlBase}/refreshToken`;
   const headers = {
     "Content-Type": "application/json",
     "x-token": token,
