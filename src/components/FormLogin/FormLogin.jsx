@@ -18,6 +18,8 @@ import { Notification } from "../Others/Notification";
 
 import { signIn } from "../../services/auth";
 
+import { useForm } from "react-hook-form";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -44,13 +46,14 @@ export default function FormLogin() {
     correo: "",
     password: "",
   });
-
   const [showPassword, setshowPassword] = useState(false);
   const [alert, setAlert] = useState({
     open: false,
     message: "",
     variant: "",
   });
+
+  const { register, handleSubmit, errors } = useForm();
 
   const handleClickShowPassword = () => {
     setshowPassword(!showPassword);
@@ -66,7 +69,7 @@ export default function FormLogin() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const onSubmit = async (_, e) => {
     e.preventDefault();
     const response = await signIn(formValues);
     if (!response.ok) {
@@ -96,8 +99,9 @@ export default function FormLogin() {
         <Typography component="h1" variant="h5">
           Inicia sesión
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
+            name="correo"
             autoComplete="email"
             autoFocus
             color="secondary"
@@ -105,22 +109,37 @@ export default function FormLogin() {
             label="Correo"
             margin="normal"
             onChange={handleChange}
-            value={formValues.correo}
-            name="correo"
-            required
+            defaultValue={formValues.correo}
             variant="outlined"
+            inputRef={register({
+              required: { value: true, message: "El correo es requerido" },
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "El correo no es válido",
+              },
+            })}
           />
+          <Typography
+            variant="body1"
+            display="block"
+            color="error"
+            gutterBottom
+          >
+            {errors?.correo?.message}
+          </Typography>
           <TextField
             color="secondary"
             fullWidth
             label="Contraseña"
             margin="normal"
             onChange={handleChange}
-            value={formValues.password}
+            defaultValue={formValues.password}
             name="password"
-            required
             variant="outlined"
             type={showPassword ? "text" : "password"}
+            inputRef={register({
+              required: { value: true, message: "La contraseña es requerido" },
+            })}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -136,6 +155,14 @@ export default function FormLogin() {
               ),
             }}
           />
+          <Typography
+            variant="body1"
+            display="block"
+            color="error"
+            gutterBottom
+          >
+            {errors?.password?.message}
+          </Typography>
           <FormControlLabel
             control={<Checkbox value="remember" color="secondary" />}
             label="Recordarme"
