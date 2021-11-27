@@ -73,7 +73,7 @@ export const TableProveedores = () => {
                 <ButtonEditProveedor data={provider} />
               </TableCell>
               <TableCell align="left">
-                <ButtonDeleteProveedor />
+                <ButtonDeleteProveedor data={provider} />
               </TableCell>
             </TableRow>
           ))}
