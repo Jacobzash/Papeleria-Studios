@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,6 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { ButtonEditProveedor } from "./ButtonEditProveedor";
 import { ButtonDeleteProveedor } from "./ButtonDeleteProveedor";
+
+import { ProvidersContext } from "../../../context/ProvidersContext";
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -29,19 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(ID, nombre, contacto) {
-  return { ID, nombre, contacto };
-}
-
-const rows = [
-  createData(159, "Norma", "3105834343"),
-  createData(237, "Tulip", "3145454343"),
-  createData(262, "Astro", "3215674354"),
-  createData(305, "Deno", "3208764443"),
-  createData(356, "Hello", "3117002312"),
-];
 export const TableProveedores = () => {
   const classes = useStyles();
+
+  const { providers } = useContext(ProvidersContext);
 
   return (
     <TableContainer className={classes.tableContainer} component={Paper}>
@@ -69,15 +62,15 @@ export const TableProveedores = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow className={classes.tableRow} key={row.ID}>
+          {providers.map((provider) => (
+            <TableRow className={classes.tableRow} key={provider.id}>
               <TableCell component="th" scope="row">
-                {row.ID}
+                {provider.id}
               </TableCell>
-              <TableCell align="left">{row.nombre}</TableCell>
-              <TableCell align="left">{row.contacto}</TableCell>
+              <TableCell align="left">{provider.nom_prov}</TableCell>
+              <TableCell align="left">{provider.contacto_prov}</TableCell>
               <TableCell align="left">
-                <ButtonEditProveedor data={row} />
+                <ButtonEditProveedor data={provider} />
               </TableCell>
               <TableCell align="left">
                 <ButtonDeleteProveedor />
