@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ModalProveedor = ({ open, setOpen, mode, data }) => {
-  console.log(data);
   const [dataProveedor, setDataProveedor] = useState(data);
   const classes = useStyles();
   const handleClose = () => {
