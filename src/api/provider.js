@@ -23,6 +23,51 @@ export const getProvidersApi = async () => {
   }
 };
 
+export const createProviderApi = async ({ nombre, contacto }) => {
+  const url = `${urlBase}`;
+  const token = getToken();
+  const headers = {
+    "Content-Type": "application/json",
+    "x-token": token,
+  };
+  try {
+    const response = await axios.post(url, { nombre, contacto }, { headers });
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    } else {
+      return error.message;
+    }
+  }
+};
+
+export const updateProviderApi = async ({
+  id,
+  nom_prov: nombre,
+  contacto_prov: contacto,
+}) => {
+  const url = `${urlBase}`;
+  const token = getToken();
+  const headers = {
+    "Content-Type": "application/json",
+    "x-token": token,
+  };
+  try {
+    const response = await axios.put(
+      url,
+      { id, nombre, contacto },
+      { headers }
+    );
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    } else {
+      return error.message;
+    }
+  }
+};
 export const deleteProviderApi = async (id) => {
   const url = `${urlBase}`;
   const token = getToken();
