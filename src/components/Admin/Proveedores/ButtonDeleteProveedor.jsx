@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Swal from "sweetalert2";
+import { deleteProviderApi } from "../../../api/provider";
+
+import { ProvidersContext } from "../../../context/ProvidersContext";
 
 export const ButtonDeleteProveedor = ({ data }) => {
-  const handleClick = () => {
-    Swal.fire({
+  const { providers, setProviders } = useContext(ProvidersContext);
+
+  const handleClick = async () => {
+    const result = await Swal.fire({
       title: `¿Está seguro de borrar el proveedor ${data.nom_prov}?`,
       text: "No se puede revertir esta acción.",
       icon: "warning",
@@ -14,11 +19,14 @@ export const ButtonDeleteProveedor = ({ data }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, borrar esto",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Proveedor borrado", "", "success");
-      }
     });
+    if (result.isConfirmed) {
+      const response = await deleteProviderApi(data.id);
+      if (response.ok) {
+        Swal.fire(response.msg, "", "success");
+        setProviders(providers.filter((prov) => prov.id !== data.id));
+      }
+    }
   };
   return (
     <IconButton color="secondary" onClick={handleClick}>
