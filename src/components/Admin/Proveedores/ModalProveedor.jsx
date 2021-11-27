@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ModalProveedor = ({ open, setOpen, mode, data }) => {
+  console.log(data);
   const [dataProveedor, setDataProveedor] = useState(data);
   const classes = useStyles();
   const handleClose = () => {
@@ -39,7 +40,7 @@ export const ModalProveedor = ({ open, setOpen, mode, data }) => {
         <div className={classes.headerDialog}>
           <DialogTitle id="Proveedor" onClose={handleClose}>
             {mode === "edit"
-              ? `Editando el proveedor ${data.nombre}`
+              ? `Editando el proveedor ${data.nom_prov}`
               : "Crear un proveedor"}
           </DialogTitle>
           <IconButton aria-label="Cerrar modal" onClick={handleClose}>

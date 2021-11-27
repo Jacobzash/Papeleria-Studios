@@ -23,7 +23,7 @@ export const FormProveedor = ({
         label="Nombre"
         margin="normal"
         onChange={handleChange}
-        defaultValue={mode === "edit" ? dataProveedor.nombre : ""}
+        defaultValue={mode === "edit" ? dataProveedor.nom_prov : ""}
         name="nombre"
         required
         variant="outlined"
@@ -34,9 +34,8 @@ export const FormProveedor = ({
         label="Contacto"
         margin="normal"
         onChange={handleChange}
-        defaultValue={mode === "edit" ? dataProveedor.contacto : ""}
+        defaultValue={mode === "edit" ? dataProveedor.contacto_prov : ""}
         name="contacto"
-        type="number"
         required
         variant="outlined"
       />
