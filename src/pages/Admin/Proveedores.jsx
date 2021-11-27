@@ -10,7 +10,6 @@ import { ProvidersContext } from "../../context/ProvidersContext";
 
 export const Proveedores = () => {
   const { providers, setProviders } = useContext(ProvidersContext);
-  console.log(providers);
   useEffect(() => {
     const getProveedores = async () => {
       const response = await getProvidersApi();
