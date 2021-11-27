@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,6 +9,12 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { FormProveedor } from "./FormProveedor";
 
+import { useForm } from "react-hook-form";
+import { createProviderApi, updateProviderApi } from "../../../api/provider";
+
+import { ProvidersContext } from "../../../context/ProvidersContext";
+import Swal from "sweetalert2";
+
 const useStyles = makeStyles((theme) => ({
   headerDialog: {
     display: "flex",
@@ -18,15 +24,41 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ModalProveedor = ({ open, setOpen, mode, data }) => {
+  const { register, handleSubmit, errors } = useForm();
   const [dataProveedor, setDataProveedor] = useState(data);
+  const { providers, setProviders } = useContext(ProvidersContext);
+
   const classes = useStyles();
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit = (e) => {
+  const onSubmit = async (data, e) => {
     e.preventDefault();
-    console.log(dataProveedor);
-    handleClose();
+    if (mode === "edit") {
+      dataProveedor.nom_prov = data.nombre;
+      dataProveedor.contacto_prov = data.contacto;
+      const result = await updateProviderApi(dataProveedor);
+      if (result.ok) {
+        handleClose();
+        setProviders(
+          providers.map((prov) => {
+            if (prov.id === result.provider.id) {
+              return result.provider;
+            }
+            return prov;
+          })
+        );
+        Swal.fire(result.msg, "", "success");
+      }
+    } else {
+      const result = await createProviderApi(dataProveedor);
+      if (result.ok) {
+        handleClose();
+        const provider = result.provider;
+        setProviders([provider, ...providers]);
+        Swal.fire(result.msg, "", "success");
+      }
+    }
   };
   return (
     <div>
@@ -46,33 +78,31 @@ export const ModalProveedor = ({ open, setOpen, mode, data }) => {
             <CloseIcon />
           </IconButton>
         </div>
-        <DialogContent dividers>
-          <FormProveedor
-            dataProveedor={dataProveedor}
-            setDataProveedor={setDataProveedor}
-            handleSubmit={handleSubmit}
-            data={data}
-            mode={mode}
-          />
-        </DialogContent>
-        <DialogActions className={classes.actions}>
-          <Button
-            autoFocus
-            onClick={handleSubmit}
-            variant="contained"
-            color="primary"
-          >
-            Guardar proveedor
-          </Button>
-          <Button
-            autoFocus
-            onClick={handleClose}
-            variant="contained"
-            color="secondary"
-          >
-            Cancelar
-          </Button>
-        </DialogActions>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogContent dividers>
+            <FormProveedor
+              dataProveedor={dataProveedor}
+              setDataProveedor={setDataProveedor}
+              data={data}
+              mode={mode}
+              register={register}
+              errors={errors}
+            />
+          </DialogContent>
+          <DialogActions className={classes.actions}>
+            <Button type="submit" autoFocus variant="contained" color="primary">
+              Guardar proveedor
+            </Button>
+            <Button
+              autoFocus
+              onClick={handleClose}
+              variant="contained"
+              color="secondary"
+            >
+              Cancelar
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );
