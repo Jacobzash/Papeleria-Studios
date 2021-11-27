@@ -3,7 +3,7 @@ import { apiVersion, basePath } from "./config";
 
 const urlBase = `${basePath}/${apiVersion}`;
 
-export const signInApi = async (correo, password) => {
+export const signInApi = async ({ correo, password }) => {
   const url = `${urlBase}/auth/signIn`;
   const headers = {
     "Content-Type": "application/json",

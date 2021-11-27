@@ -16,9 +16,8 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 import { Notification } from "../Others/Notification";
 
-import { signIn } from "../../services/auth";
-
 import { useForm } from "react-hook-form";
+import { signInApi } from "../../api/auth";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,7 +70,7 @@ export default function FormLogin() {
 
   const onSubmit = async (_, e) => {
     e.preventDefault();
-    const response = await signIn(formValues);
+    const response = await signInApi(formValues);
     if (!response.ok) {
       setAlert({
         open: true,
