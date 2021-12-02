@@ -16,10 +16,10 @@ export const AdminRouter = () => {
         <CategoriesProvider>
           <Route exact path="/admin/categorias" component={Categorias} />
         </CategoriesProvider>
-        <Route exact path="/admin/productos" component={Productos} />
         <ProvidersProvider>
           <Route exact path="/admin/proveedores" component={Proveedores} />
         </ProvidersProvider>
+        <Route exact path="/admin/productos" component={Productos} />
         <Route exact path="/admin/inventario" component={Categorias} />
         <Route exact path="/admin/ventas" component={Categorias} />
         <Route exact path="/admin/estadisticas" component={Categorias} />
