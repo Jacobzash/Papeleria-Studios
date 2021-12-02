@@ -33,7 +33,7 @@ export const ModalCategoria = ({ open, setOpen, mode, data }) => {
     e.preventDefault();
     if (mode === "edit") {
       dataCategoria.nom_cat = data.nombre;
-      dataCategoria.desc_cat = data.descripcion;
+      dataCategoria.des_cat = data.descripcion;
       const result = await updateCategoryApi(dataCategoria);
       if (result.ok) {
         handleClose();
@@ -45,8 +45,8 @@ export const ModalCategoria = ({ open, setOpen, mode, data }) => {
             return cat;
           })
         );
+        Swal.fire(result.msg, "", "success");
       }
-      Swal.fire(result.msg, "", "success");
     } else {
       const result = await createCategoryApi(dataCategoria);
       if (result.ok) {
