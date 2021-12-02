@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,6 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { ButtonEditCategoria } from "./ButtonEditCategoria";
 import { ButtonDeleteCategoria } from "./ButtonDeleteCategoria";
+
+import { CategoriesContext } from "../../../context/CategoriesContext";
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -29,20 +31,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(ID, nombre, descripcion) {
-  return { ID, nombre, descripcion };
-}
-
-const rows = [
-  createData(159, "Lapices", "Lapices de todos los tamaños y colores"),
-  createData(237, "Cuadernos", "Cuadernos de todos los tamaños"),
-  createData(262, "Lapiceros", "Lapiceros para escribir"),
-  createData(305, "Correctores", "Correctores para corregir."),
-  createData(356, "Borradores", "Borradores para borrar."),
-];
-
 export const TableCategorias = () => {
   const classes = useStyles();
+  const { categories } = useContext(CategoriesContext);
 
   return (
     <TableContainer className={classes.tableContainer} component={Paper}>
@@ -70,18 +61,18 @@ export const TableCategorias = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow className={classes.tableRow} key={row.ID}>
+          {categories.map((category) => (
+            <TableRow className={classes.tableRow} key={category.id}>
               <TableCell component="th" scope="row">
-                {row.ID}
+                {category.id}
               </TableCell>
-              <TableCell align="left">{row.nombre}</TableCell>
-              <TableCell align="left">{row.descripcion}</TableCell>
+              <TableCell align="left">{category.nom_cat}</TableCell>
+              <TableCell align="left">{category.des_cat}</TableCell>
               <TableCell align="left">
-                <ButtonEditCategoria data={row} />
+                <ButtonEditCategoria data={category} />
               </TableCell>
               <TableCell align="left">
-                <ButtonDeleteCategoria />
+                <ButtonDeleteCategoria data={category} />
               </TableCell>
             </TableRow>
           ))}
