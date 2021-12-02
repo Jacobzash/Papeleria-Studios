@@ -20,7 +20,7 @@ export const Categorias = () => {
       }
     };
     getCategorias();
-  }, []);
+  }, [setCategories]);
 
   return (
     <>
