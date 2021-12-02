@@ -61,7 +61,7 @@ export const ListMenu = ({ handleDrawerClose }) => {
             text="Productos"
           />
           <ListMenuItem
-            route="/admin/proveedor"
+            route="/admin/proveedores"
             handleDrawerClose={handleDrawerClose}
             icon={<LocalShippingIcon />}
             classe={classes.nested}
