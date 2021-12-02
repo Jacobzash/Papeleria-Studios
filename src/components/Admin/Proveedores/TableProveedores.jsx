@@ -51,7 +51,7 @@ export const TableProveedores = () => {
               Nombre
             </TableCell>
             <TableCell className={classes.tableHead} align="left">
-              Conctacto
+              Contacto
             </TableCell>
             <TableCell className={classes.tableHead} align="left">
               Editar
