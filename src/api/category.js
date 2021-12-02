@@ -23,6 +23,56 @@ export const getCategoriesApi = async () => {
   }
 };
 
+export const createCategoryApi = async ({ nombre, descripcion }) => {
+  const url = `${urlBase}`;
+  const token = getToken();
+  const headers = {
+    "Content-Type": "application/json",
+    "x-token": token,
+  };
+  try {
+    const response = await axios.post(
+      url,
+      { nombre, descripcion },
+      { headers }
+    );
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    } else {
+      return error.message;
+    }
+  }
+};
+
+export const updateCategoryApi = async ({
+  id,
+  nom_cat: nombre,
+  des_cat: descripcion,
+}) => {
+  const url = `${urlBase}`;
+  const token = getToken();
+  const headers = {
+    "Content-Type": "application/json",
+    "x-token": token,
+  };
+  try {
+    const response = await axios.put(
+      url,
+      { id, nombre, descripcion },
+      { headers }
+    );
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    } else {
+      return error.message;
+    }
+  }
+};
+
 export const deleteCategoryApi = async (id) => {
   const url = `${urlBase}`;
   const token = getToken();

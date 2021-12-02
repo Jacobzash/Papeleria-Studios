@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,6 +8,10 @@ import DialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { FormCategoria } from "./FormCategoria";
+import { CategoriesContext } from "../../../context/CategoriesContext";
+import { useForm } from "react-hook-form";
+import { createCategoryApi, updateCategoryApi } from "../../../api/category";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
   headerDialog: {
@@ -18,14 +22,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const ModalCategoria = ({ open, setOpen, mode, data }) => {
   const [dataCategoria, setDataCategoria] = useState(data);
+  const { categories, setCategories } = useContext(CategoriesContext);
+  const { register, handleSubmit, errors } = useForm();
+
   const classes = useStyles();
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit = (e) => {
+  const onSubmit = async (data, e) => {
     e.preventDefault();
-    console.log(dataCategoria);
-    handleClose();
+    if (mode === "edit") {
+      dataCategoria.nom_cat = data.nombre;
+      dataCategoria.desc_cat = data.descripcion;
+      const result = await updateCategoryApi(dataCategoria);
+      if (result.ok) {
+        handleClose();
+        setCategories(
+          categories.map((cat) => {
+            if (cat.id === result.category.id) {
+              return result.category;
+            }
+            return cat;
+          })
+        );
+      }
+      Swal.fire(result.msg, "", "success");
+    } else {
+      const result = await createCategoryApi(dataCategoria);
+      if (result.ok) {
+        handleClose();
+        const category = result.category;
+        setCategories([category, ...categories]);
+        Swal.fire(result.msg, "", "success");
+      }
+    }
   };
   return (
     <div>
@@ -45,33 +75,30 @@ export const ModalCategoria = ({ open, setOpen, mode, data }) => {
             <CloseIcon />
           </IconButton>
         </div>
-        <DialogContent dividers>
-          <FormCategoria
-            dataCategoria={dataCategoria}
-            setDataCategoria={setDataCategoria}
-            handleSubmit={handleSubmit}
-            data={data}
-            mode={mode}
-          />
-        </DialogContent>
-        <DialogActions className={classes.actions}>
-          <Button
-            autoFocus
-            onClick={handleSubmit}
-            variant="contained"
-            color="primary"
-          >
-            Guardar categoría
-          </Button>
-          <Button
-            autoFocus
-            onClick={handleClose}
-            variant="contained"
-            color="secondary"
-          >
-            Cancelar
-          </Button>
-        </DialogActions>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogContent dividers>
+            <FormCategoria
+              dataCategoria={dataCategoria}
+              setDataCategoria={setDataCategoria}
+              mode={mode}
+              register={register}
+              errors={errors}
+            />
+          </DialogContent>
+          <DialogActions className={classes.actions}>
+            <Button autoFocus type="submit" variant="contained" color="primary">
+              Guardar categoría
+            </Button>
+            <Button
+              autoFocus
+              onClick={handleClose}
+              variant="contained"
+              color="secondary"
+            >
+              Cancelar
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

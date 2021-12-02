@@ -1,10 +1,12 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+
 export const FormCategoria = ({
   dataCategoria,
   setDataCategoria,
-  handleSubmit,
-  data,
+  register,
+  errors,
   mode,
 }) => {
   const handleChange = ({ target }) => {
@@ -15,7 +17,7 @@ export const FormCategoria = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <TextField
         autoFocus
         color="secondary"
@@ -23,11 +25,19 @@ export const FormCategoria = ({
         label="Nombre"
         margin="normal"
         onChange={handleChange}
-        defaultValue={mode === "edit" ? dataCategoria.nombre : ""}
+        defaultValue={mode === "edit" ? dataCategoria.nom_cat : ""}
         name="nombre"
-        required
         variant="outlined"
+        inputRef={register({
+          required: {
+            value: true,
+            message: "El nombre de la categoría es requerido",
+          },
+        })}
       />
+      <Typography variant="body1" display="block" color="error" gutterBottom>
+        {errors?.nombre?.message}
+      </Typography>
       <TextField
         color="secondary"
         fullWidth
@@ -35,11 +45,19 @@ export const FormCategoria = ({
         multiline
         margin="normal"
         onChange={handleChange}
-        defaultValue={mode === "edit" ? dataCategoria.descripcion : ""}
+        defaultValue={mode === "edit" ? dataCategoria.des_cat : ""}
         name="descripcion"
-        required
         variant="outlined"
+        inputRef={register({
+          required: {
+            value: true,
+            message: "La descripción de la categoría es requerida",
+          },
+        })}
       />
-    </form>
+      <Typography variant="body1" display="block" color="error" gutterBottom>
+        {errors?.descripcion?.message}
+      </Typography>
+    </>
   );
 };
