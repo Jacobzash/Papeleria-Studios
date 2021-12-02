@@ -4,10 +4,10 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Swal from "sweetalert2";
 import { deleteProviderApi } from "../../../api/provider";
 
-import { ProvidersContext } from "../../../context/ProvidersContext";
+import { AdminContext } from "../../../context/AdminContext";
 
 export const ButtonDeleteProveedor = ({ data }) => {
-  const { providers, setProviders } = useContext(ProvidersContext);
+  const { providers, setProviders } = useContext(AdminContext);
 
   const handleClick = async () => {
     const result = await Swal.fire({

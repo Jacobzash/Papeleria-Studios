@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { ButtonEditCategoria } from "./ButtonEditCategoria";
 import { ButtonDeleteCategoria } from "./ButtonDeleteCategoria";
 
-import { CategoriesContext } from "../../../context/CategoriesContext";
+import { AdminContext } from "../../../context/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const TableCategorias = () => {
   const classes = useStyles();
-  const { categories } = useContext(CategoriesContext);
+  const { categories } = useContext(AdminContext);
 
   return (
     <TableContainer className={classes.tableContainer} component={Paper}>

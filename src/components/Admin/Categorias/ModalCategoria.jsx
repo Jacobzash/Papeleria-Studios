@@ -8,7 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { FormCategoria } from "./FormCategoria";
-import { CategoriesContext } from "../../../context/CategoriesContext";
+import { AdminContext } from "../../../context/AdminContext";
 import { useForm } from "react-hook-form";
 import { createCategoryApi, updateCategoryApi } from "../../../api/category";
 import Swal from "sweetalert2";
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const ModalCategoria = ({ open, setOpen, mode, data }) => {
   const [dataCategoria, setDataCategoria] = useState(data);
-  const { categories, setCategories } = useContext(CategoriesContext);
+  const { categories, setCategories } = useContext(AdminContext);
   const { register, handleSubmit, errors } = useForm();
 
   const classes = useStyles();

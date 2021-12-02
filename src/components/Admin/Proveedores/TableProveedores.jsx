@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { ButtonEditProveedor } from "./ButtonEditProveedor";
 import { ButtonDeleteProveedor } from "./ButtonDeleteProveedor";
 
-import { ProvidersContext } from "../../../context/ProvidersContext";
+import { AdminContext } from "../../../context/AdminContext";
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 export const TableProveedores = () => {
   const classes = useStyles();
 
-  const { providers } = useContext(ProvidersContext);
+  const { providers } = useContext(AdminContext);
 
   return (
     <TableContainer className={classes.tableContainer} component={Paper}>

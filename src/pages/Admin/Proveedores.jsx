@@ -6,10 +6,10 @@ import { TableProveedores } from "../../components/Admin/Proveedores/TableProvee
 import { getProvidersApi } from "../../api/provider";
 import { Loading } from "../../components/Others/Loading";
 
-import { ProvidersContext } from "../../context/ProvidersContext";
+import { AdminContext } from "../../context/AdminContext";
 
 export const Proveedores = () => {
-  const { providers, setProviders } = useContext(ProvidersContext);
+  const { providers, setProviders } = useContext(AdminContext);
   useEffect(() => {
     const getProveedores = async () => {
       const response = await getProvidersApi();

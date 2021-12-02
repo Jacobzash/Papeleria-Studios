@@ -5,12 +5,12 @@ import Container from "@material-ui/core/Container";
 import { InputSearchCategoria } from "../../components/Admin/Categorias/InputSearchCategoria";
 import { TableCategorias } from "../../components/Admin/Categorias/TableCategorias";
 
-import { CategoriesContext } from "../../context/CategoriesContext";
+import { AdminContext } from "../../context/AdminContext";
 import { getCategoriesApi } from "../../api/category";
 import { Loading } from "../../components/Others/Loading";
 
 export const Categorias = () => {
-  const { categories, setCategories } = useContext(CategoriesContext);
+  const { categories, setCategories } = useContext(AdminContext);
 
   useEffect(() => {
     const getCategorias = async () => {

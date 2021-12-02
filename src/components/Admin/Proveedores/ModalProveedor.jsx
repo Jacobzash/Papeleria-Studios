@@ -12,7 +12,7 @@ import { FormProveedor } from "./FormProveedor";
 import { useForm } from "react-hook-form";
 import { createProviderApi, updateProviderApi } from "../../../api/provider";
 
-import { ProvidersContext } from "../../../context/ProvidersContext";
+import { AdminContext } from "../../../context/AdminContext";
 import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export const ModalProveedor = ({ open, setOpen, mode, data }) => {
   const { register, handleSubmit, errors } = useForm();
   const [dataProveedor, setDataProveedor] = useState(data);
-  const { providers, setProviders } = useContext(ProvidersContext);
+  const { providers, setProviders } = useContext(AdminContext);
 
   const classes = useStyles();
   const handleClose = () => {
