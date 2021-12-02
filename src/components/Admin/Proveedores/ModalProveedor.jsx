@@ -83,7 +83,6 @@ export const ModalProveedor = ({ open, setOpen, mode, data }) => {
             <FormProveedor
               dataProveedor={dataProveedor}
               setDataProveedor={setDataProveedor}
-              data={data}
               mode={mode}
               register={register}
               errors={errors}
