@@ -34,6 +34,7 @@ export const ModalCategoria = ({ open, setOpen, mode, data }) => {
     if (mode === "edit") {
       dataCategoria.nom_cat = data.nombre;
       dataCategoria.des_cat = data.descripcion;
+      console.log(dataCategoria);
       const result = await updateCategoryApi(dataCategoria);
       if (result.ok) {
         handleClose();
