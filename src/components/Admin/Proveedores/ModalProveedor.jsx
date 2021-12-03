@@ -35,8 +35,6 @@ export const ModalProveedor = ({ open, setOpen, mode, data }) => {
   const onSubmit = async (data, e) => {
     e.preventDefault();
     if (mode === "edit") {
-      dataProveedor.nom_prov = data.nombre;
-      dataProveedor.contacto_prov = data.contacto;
       const result = await updateProviderApi(dataProveedor);
       if (result.ok) {
         handleClose();

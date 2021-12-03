@@ -25,7 +25,7 @@ export const FormProveedor = ({
         margin="normal"
         onChange={handleChange}
         defaultValue={mode === "edit" ? dataProveedor.nom_prov : ""}
-        name="nombre"
+        name="nom_prov"
         variant="outlined"
         inputRef={register({
           required: {
@@ -35,7 +35,7 @@ export const FormProveedor = ({
         })}
       />
       <Typography variant="body1" display="block" color="error" gutterBottom>
-        {errors?.nombre?.message}
+        {errors?.nom_prov?.message}
       </Typography>
       <TextField
         color="secondary"
@@ -44,7 +44,7 @@ export const FormProveedor = ({
         margin="normal"
         onChange={handleChange}
         defaultValue={mode === "edit" ? dataProveedor.contacto_prov : ""}
-        name="contacto"
+        name="contacto_prov"
         variant="outlined"
         inputRef={register({
           required: {
@@ -54,7 +54,7 @@ export const FormProveedor = ({
         })}
       />
       <Typography variant="body1" display="block" color="error" gutterBottom>
-        {errors?.contacto?.message}
+        {errors?.contacto_prov?.message}
       </Typography>
     </>
   );

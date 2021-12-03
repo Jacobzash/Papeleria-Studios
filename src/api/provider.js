@@ -23,7 +23,10 @@ export const getProvidersApi = async () => {
   }
 };
 
-export const createProviderApi = async ({ nombre, contacto }) => {
+export const createProviderApi = async ({
+  nom_prov: nombre,
+  contacto_prov: contacto,
+}) => {
   const url = `${urlBase}`;
   const token = getToken();
   const headers = {
