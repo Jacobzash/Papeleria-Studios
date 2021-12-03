@@ -45,19 +45,6 @@ export const Panel = () => {
           </Link>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Link to="/admin/productos">
-            <Button
-              variant="contained"
-              fullWidth
-              color="secondary"
-              size="large"
-              endIcon={<CreateIcon className={classes.sizeButtons} />}
-            >
-              Módulo Productos
-            </Button>
-          </Link>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
           <Link to="/admin/proveedores">
             <Button
               variant="contained"
@@ -67,6 +54,19 @@ export const Panel = () => {
               endIcon={<LocalShippingIcon className={classes.sizeButtons} />}
             >
               Módulo Proveedores
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Link to="/admin/productos">
+            <Button
+              variant="contained"
+              fullWidth
+              color="secondary"
+              size="large"
+              endIcon={<CreateIcon className={classes.sizeButtons} />}
+            >
+              Módulo Productos
             </Button>
           </Link>
         </Grid>

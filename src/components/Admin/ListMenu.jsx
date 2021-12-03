@@ -54,18 +54,18 @@ export const ListMenu = ({ handleDrawerClose }) => {
             text="Categorias"
           />
           <ListMenuItem
-            route="/admin/productos"
-            handleDrawerClose={handleDrawerClose}
-            icon={<CreateIcon />}
-            classe={classes.nested}
-            text="Productos"
-          />
-          <ListMenuItem
             route="/admin/proveedores"
             handleDrawerClose={handleDrawerClose}
             icon={<LocalShippingIcon />}
             classe={classes.nested}
             text="Proveedores"
+          />
+          <ListMenuItem
+            route="/admin/productos"
+            handleDrawerClose={handleDrawerClose}
+            icon={<CreateIcon />}
+            classe={classes.nested}
+            text="Productos"
           />
           <ListMenuItem
             route="/admin/inventario"
