@@ -29,12 +29,9 @@ export const ModalCategoria = ({ open, setOpen, mode, data }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (_, e) => {
     e.preventDefault();
     if (mode === "edit") {
-      dataCategoria.nom_cat = data.nombre;
-      dataCategoria.des_cat = data.descripcion;
-      console.log(dataCategoria);
       const result = await updateCategoryApi(dataCategoria);
       if (result.ok) {
         handleClose();
@@ -69,7 +66,7 @@ export const ModalCategoria = ({ open, setOpen, mode, data }) => {
         <div className={classes.headerDialog}>
           <DialogTitle id="Categoría" onClose={handleClose}>
             {mode === "edit"
-              ? `Editando la categoria ${data.nombre}`
+              ? `Editando la categoria ${data.nom_cat}`
               : "Crear una categoría"}
           </DialogTitle>
           <IconButton aria-label="Cerrar modal" onClick={handleClose}>

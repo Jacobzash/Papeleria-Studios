@@ -23,7 +23,10 @@ export const getCategoriesApi = async () => {
   }
 };
 
-export const createCategoryApi = async ({ nombre, descripcion }) => {
+export const createCategoryApi = async ({
+  nom_cat: nombre,
+  des_cat: descripcion,
+}) => {
   const url = `${urlBase}`;
   const token = getToken();
   const headers = {

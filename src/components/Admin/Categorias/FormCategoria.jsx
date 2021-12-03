@@ -26,7 +26,7 @@ export const FormCategoria = ({
         margin="normal"
         onChange={handleChange}
         defaultValue={mode === "edit" ? dataCategoria.nom_cat : ""}
-        name="nombre"
+        name="nom_cat"
         variant="outlined"
         inputRef={register({
           required: {
@@ -36,7 +36,7 @@ export const FormCategoria = ({
         })}
       />
       <Typography variant="body1" display="block" color="error" gutterBottom>
-        {errors?.nombre?.message}
+        {errors?.nom_cat?.message}
       </Typography>
       <TextField
         color="secondary"
@@ -46,7 +46,7 @@ export const FormCategoria = ({
         margin="normal"
         onChange={handleChange}
         defaultValue={mode === "edit" ? dataCategoria.des_cat : ""}
-        name="descripcion"
+        name="des_cat"
         variant="outlined"
         inputRef={register({
           required: {
@@ -56,7 +56,7 @@ export const FormCategoria = ({
         })}
       />
       <Typography variant="body1" display="block" color="error" gutterBottom>
-        {errors?.descripcion?.message}
+        {errors?.des_cat?.message}
       </Typography>
     </>
   );
