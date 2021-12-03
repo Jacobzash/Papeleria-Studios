@@ -8,6 +8,7 @@ import { TableCategorias } from "../../components/Admin/Categorias/TableCategori
 import { AdminContext } from "../../context/AdminContext";
 import { getCategoriesApi } from "../../api/category";
 import { Loading } from "../../components/Others/Loading";
+import { EmptyInfo } from "../../components/Others/EmptyInfo";
 
 export const Categorias = () => {
   const { categories, setCategories } = useContext(AdminContext);
@@ -21,7 +22,6 @@ export const Categorias = () => {
     };
     getCategorias();
   }, [setCategories]);
-
   return (
     <>
       <Typography variant="h3" color="primary" align="center">
@@ -29,11 +29,19 @@ export const Categorias = () => {
       </Typography>
       <Container component="div" maxWidth="lg">
         {!categories ? (
-          <Loading variantMessage="h5" message="Cargando categorias..." />
-        ) : (
+          <Loading variantMessage="h4" message="Cargando categorias..." />
+        ) : categories.length > 0 ? (
           <>
             <InputSearchCategoria />
             <TableCategorias />
+          </>
+        ) : (
+          <>
+            <InputSearchCategoria />
+            <EmptyInfo
+              title="No registros de categorías aún"
+              variantMessage="h4"
+            />
           </>
         )}
       </Container>
