@@ -100,7 +100,7 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
             <div className={classes.headerDialog}>
               <DialogTitle id="Producto" onClose={handleClose}>
                 {mode === "edit"
-                  ? `Editando el producto ${data.nombre}`
+                  ? `Editando el producto ${data.nom_produc}`
                   : "Crear un producto"}
               </DialogTitle>
               <IconButton aria-label="Cerrar modal" onClick={handleClose}>
