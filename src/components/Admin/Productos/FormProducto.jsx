@@ -217,7 +217,7 @@ export const FormProducto = ({
         {dataProducto?.url_image && !dataProducto.url_image.name && (
           <img
             src={dataProducto.url_image}
-            alt="preview"
+            alt={`Imagen del producto ${dataProducto.nom_produc}`}
             style={{ maxWidth: "100%" }}
           />
         )}
