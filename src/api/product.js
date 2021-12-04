@@ -72,8 +72,13 @@ export const updateProductApi = async ({
     "Content-Type": "application/json",
     "x-token": token,
   };
-  url_image =
-    "https://larepublica.pe/resizer/csNa2bb_rRBUbbmKPp2Hbtd_nSM=/660x360/top/larepublica.pe/resizer/8ZuQ7BjJnugC7n3W0FStVtmDCQU=/660x360/top/smart/larepublica.pe/resizer/aE-G5N9mYRbYweeSPO9nIiEcAm0=/660x360/top/smart/cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/ZGCXB332FFEGLLWMZJQSCW5KHM.jpg";
+  url_image = await uploadImageProductApi(url_image);
+  if (url_image === null) {
+    return {
+      ok: false,
+      msg: "No se pudo subir la imagen",
+    };
+  }
   try {
     const response = await axios.put(
       url,
