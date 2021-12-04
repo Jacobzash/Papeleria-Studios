@@ -8,18 +8,30 @@ import { AdminContext } from "../../context/AdminContext";
 import { Loading } from "../../components/Others/Loading";
 import { getProductsApi } from "../../api/product";
 import { EmptyInfo } from "../../components/Others/EmptyInfo";
+import { getProvidersApi } from "../../api/provider";
+import { getCategoriesApi } from "../../api/category";
 
 export const Productos = () => {
-  const { products, setProducts } = useContext(AdminContext);
+  const { products, setProducts, setProviders, setCategories } =
+    useContext(AdminContext);
+
   useEffect(() => {
-    const getProductos = async () => {
+    const getData = async () => {
       const response = await getProductsApi();
+      const resultProviders = await getProvidersApi();
+      const resultCategories = await getCategoriesApi();
       if (response.ok) {
         setProducts(response.products);
       }
+      if (resultProviders.ok) {
+        setProviders(resultProviders.providers);
+      }
+      if (resultCategories.ok) {
+        setCategories(resultCategories.categories);
+      }
     };
-    getProductos();
-  }, [setProducts]);
+    getData();
+  }, [setProducts, setProviders, setCategories]);
   return (
     <>
       <Typography variant="h3" color="primary" align="center">

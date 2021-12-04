@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -11,9 +11,6 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { createProductApi, updateProductApi } from "../../../api/product";
 import { AdminContext } from "../../../context/AdminContext";
-import { getCategoriesApi } from "../../../api/category";
-import { getProvidersApi } from "../../../api/provider";
-import { Loading } from "../../Others/Loading";
 import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,22 +41,6 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const [changeImage, setChangeImage] = useState(false);
   const classes = useStyles();
-
-  const { setProviders, setCategories, categories } = useContext(AdminContext);
-
-  useEffect(() => {
-    const getDataSelects = async () => {
-      const resultProviders = await getProvidersApi();
-      const resultCategories = await getCategoriesApi();
-      if (resultProviders.ok) {
-        setProviders(resultProviders.providers);
-      }
-      if (resultCategories.ok) {
-        setCategories(resultCategories.categories);
-      }
-    };
-    getDataSelects();
-  }, [setProviders, setCategories]);
 
   const handleClose = () => {
     setOpen(false);
@@ -96,61 +77,57 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
   };
   return (
     <div>
-      {!categories ? (
-        <Loading />
-      ) : (
-        <Dialog
-          onClose={handleClose}
-          aria-labelledby="Modal de Productos"
-          open={open}
-          scroll="paper"
-        >
-          <div className={classes.dialog}>
-            <div className={classes.headerDialog}>
-              <div id="Producto" className={classes.containerTitle}>
-                <Typography variant="h6" className={classes.titleProduct}>
-                  {mode === "edit"
-                    ? `Editando el producto ${data.nom_produc}`
-                    : "Crear un producto"}
-                </Typography>
-              </div>
-              <IconButton aria-label="Cerrar modal" onClick={handleClose}>
-                <CloseIcon />
-              </IconButton>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="Modal de Productos"
+        open={open}
+        scroll="paper"
+      >
+        <div className={classes.dialog}>
+          <div className={classes.headerDialog}>
+            <div id="Producto" className={classes.containerTitle}>
+              <Typography variant="h6" className={classes.titleProduct}>
+                {mode === "edit"
+                  ? `Editando el producto ${data.nom_produc}`
+                  : "Crear un producto"}
+              </Typography>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <DialogContent dividers>
-                <FormProducto
-                  dataProducto={dataProducto}
-                  setDataProducto={setDataProducto}
-                  setChangeImage={setChangeImage}
-                  mode={mode}
-                  register={register}
-                  errors={errors}
-                />
-              </DialogContent>
-              <DialogActions className={classes.actions}>
-                <Button
-                  autoFocus
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
-                  Guardar producto
-                </Button>
-                <Button
-                  autoFocus
-                  onClick={handleClose}
-                  variant="contained"
-                  color="secondary"
-                >
-                  Cancelar
-                </Button>
-              </DialogActions>
-            </form>
+            <IconButton aria-label="Cerrar modal" onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
           </div>
-        </Dialog>
-      )}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <DialogContent dividers>
+              <FormProducto
+                dataProducto={dataProducto}
+                setDataProducto={setDataProducto}
+                setChangeImage={setChangeImage}
+                mode={mode}
+                register={register}
+                errors={errors}
+              />
+            </DialogContent>
+            <DialogActions className={classes.actions}>
+              <Button
+                autoFocus
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Guardar producto
+              </Button>
+              <Button
+                autoFocus
+                onClick={handleClose}
+                variant="contained"
+                color="secondary"
+              >
+                Cancelar
+              </Button>
+            </DialogActions>
+          </form>
+        </div>
+      </Dialog>
     </div>
   );
 };

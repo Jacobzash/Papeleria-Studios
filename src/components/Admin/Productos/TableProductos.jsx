@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 export const TableProductos = () => {
   const classes = useStyles();
   const { products } = useContext(AdminContext);
-
   return (
     <TableContainer className={classes.tableContainer} component={Paper}>
       <Table
