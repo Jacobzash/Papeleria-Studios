@@ -58,26 +58,31 @@ export const createProductApi = async ({
   }
 };
 
-export const updateProductApi = async ({
-  id,
-  nom_produc: nombre,
-  valor_unitario: precio,
-  url_image,
-  id_categoria,
-  id_proveedor,
-}) => {
+export const updateProductApi = async (
+  {
+    id,
+    nom_produc: nombre,
+    valor_unitario: precio,
+    url_image,
+    id_categoria,
+    id_proveedor,
+  },
+  changeImagen
+) => {
   const url = `${urlBase}`;
   const token = getToken();
   const headers = {
     "Content-Type": "application/json",
     "x-token": token,
   };
-  url_image = await uploadImageProductApi(url_image);
-  if (url_image === null) {
-    return {
-      ok: false,
-      msg: "No se pudo subir la imagen",
-    };
+  if (changeImagen) {
+    url_image = await uploadImageProductApi(url_image);
+    if (url_image === null) {
+      return {
+        ok: false,
+        msg: "No se pudo subir la imagen",
+      };
+    }
   }
   try {
     const response = await axios.put(

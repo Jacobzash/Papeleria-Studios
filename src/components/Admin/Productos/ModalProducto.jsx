@@ -43,6 +43,7 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
   const [dataProducto, setDataProducto] = useState(data);
   const { products, setProducts } = useContext(AdminContext);
   const { register, handleSubmit, errors, reset } = useForm();
+  const [changeImage, setChangeImage] = useState(false);
   const classes = useStyles();
 
   const { setProviders, setCategories, categories } = useContext(AdminContext);
@@ -67,8 +68,9 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
 
   const onSubmit = async (_, e) => {
     e.preventDefault();
+    console.log(e);
     if (mode === "edit") {
-      const result = await updateProductApi(dataProducto);
+      const result = await updateProductApi(dataProducto, changeImage);
       if (result.ok) {
         handleClose();
         setProducts(
@@ -122,6 +124,7 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
                 <FormProducto
                   dataProducto={dataProducto}
                   setDataProducto={setDataProducto}
+                  setChangeImage={setChangeImage}
                   mode={mode}
                   register={register}
                   errors={errors}

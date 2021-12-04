@@ -24,6 +24,7 @@ export const FormProducto = ({
   register,
   errors,
   mode,
+  setChangeImage,
 }) => {
   const classes = useStyles();
   const { providers, categories } = useContext(AdminContext);
@@ -36,13 +37,12 @@ export const FormProducto = ({
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log(e.target);
     if (file) {
       setDataProducto({
         ...dataProducto,
         [e.target.name]: file,
       });
-      console.log(file);
+      setChangeImage(true);
     }
   };
 
@@ -190,7 +190,7 @@ export const FormProducto = ({
           type="file"
           ref={register({
             required: {
-              value: true,
+              value: mode === "edit" ? false : true,
               message: "La imagen del producto es requerida",
             },
           })}
