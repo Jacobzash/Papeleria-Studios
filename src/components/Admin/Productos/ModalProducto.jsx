@@ -15,6 +15,7 @@ import { AdminContext } from "../../../context/AdminContext";
 import { getCategoriesApi } from "../../../api/category";
 import { getProvidersApi } from "../../../api/provider";
 import { Loading } from "../../Others/Loading";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -29,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  containerTitle: {
+    display: "flex",
+  },
+  titleProduct: {
+    padding: theme.spacing(2, 3),
   },
 }));
 
@@ -98,11 +105,13 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
         >
           <div className={classes.dialog}>
             <div className={classes.headerDialog}>
-              <DialogTitle id="Producto" onClose={handleClose}>
-                {mode === "edit"
-                  ? `Editando el producto ${data.nom_produc}`
-                  : "Crear un producto"}
-              </DialogTitle>
+              <div id="Producto" className={classes.containerTitle}>
+                <Typography variant="h6" className={classes.titleProduct}>
+                  {mode === "edit"
+                    ? `Editando el producto ${data.nom_produc}`
+                    : "Crear un producto"}
+                </Typography>
+              </div>
               <IconButton aria-label="Cerrar modal" onClick={handleClose}>
                 <CloseIcon />
               </IconButton>
