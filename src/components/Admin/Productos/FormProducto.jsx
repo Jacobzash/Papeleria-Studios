@@ -36,7 +36,12 @@ export const FormProducto = ({
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    console.log(e.target);
     if (file) {
+      setDataProducto({
+        ...dataProducto,
+        [e.target.name]: file,
+      });
       console.log(file);
     }
   };
@@ -204,6 +209,18 @@ export const FormProducto = ({
         <Typography variant="body1" display="block" color="error" gutterBottom>
           {errors?.url_image?.message}
         </Typography>
+        {dataProducto?.url_image?.name && (
+          <Typography variant="body1" display="block" gutterBottom>
+            {dataProducto.url_image.name}
+          </Typography>
+        )}
+        {dataProducto?.url_image && !dataProducto.url_image.name && (
+          <img
+            src={dataProducto.url_image}
+            alt="preview"
+            style={{ maxWidth: "100%" }}
+          />
+        )}
       </Grid>
     </Grid>
   );
