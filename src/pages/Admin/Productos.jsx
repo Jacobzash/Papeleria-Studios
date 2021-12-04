@@ -7,6 +7,7 @@ import { TableProductos } from "../../components/Admin/Productos/TableProductos"
 import { AdminContext } from "../../context/AdminContext";
 import { Loading } from "../../components/Others/Loading";
 import { getProductsApi } from "../../api/product";
+import { EmptyInfo } from "../../components/Others/EmptyInfo";
 
 export const Productos = () => {
   const { products, setProducts } = useContext(AdminContext);
@@ -27,10 +28,18 @@ export const Productos = () => {
       <Container component="div" maxWidth="lg">
         {!products ? (
           <Loading variantMessage="h5" message="Cargando productos..." />
-        ) : (
+        ) : products.length > 0 ? (
           <>
             <InputSearchProducto />
             <TableProductos />
+          </>
+        ) : (
+          <>
+            <InputSearchProducto />
+            <EmptyInfo
+              title="No registros de productos aún"
+              variantMessage="h4"
+            />
           </>
         )}
       </Container>

@@ -7,6 +7,7 @@ import { getProvidersApi } from "../../api/provider";
 import { Loading } from "../../components/Others/Loading";
 
 import { AdminContext } from "../../context/AdminContext";
+import { EmptyInfo } from "../../components/Others/EmptyInfo";
 
 export const Proveedores = () => {
   const { providers, setProviders } = useContext(AdminContext);
@@ -28,10 +29,18 @@ export const Proveedores = () => {
       <Container component="div" maxWidth="lg">
         {!providers ? (
           <Loading variantMessage="h5" message="Cargando proveedores..." />
-        ) : (
+        ) : providers.length > 0 ? (
           <>
             <InputSearchProveedor />
             <TableProveedores />
+          </>
+        ) : (
+          <>
+            <InputSearchProveedor />
+            <EmptyInfo
+              title="No registros de proveedores aún"
+              variantMessage="h4"
+            />
           </>
         )}
       </Container>
