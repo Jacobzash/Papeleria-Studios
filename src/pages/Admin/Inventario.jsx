@@ -8,18 +8,23 @@ import { EmptyInfo } from "../../components/Others/EmptyInfo";
 import { getInventoryApi } from "../../api/inventory";
 import { InputSearchInventario } from "../../components/Admin/Inventario/InputSearchInventario";
 import { TableInventario } from "../../components/Admin/Inventario/TableInventario";
+import { getProductsApi } from "../../api/product";
 
 export const Inventario = () => {
-  const { inventory, setInventory } = useContext(AdminContext);
+  const { inventory, setInventory, setProducts } = useContext(AdminContext);
   useEffect(() => {
     const getData = async () => {
-      const response = await getInventoryApi();
-      if (response.ok) {
-        setInventory(response.inventory);
+      const resultInventory = await getInventoryApi();
+      const resultProducts = await getProductsApi();
+      if (resultInventory.ok) {
+        setInventory(resultInventory.inventory);
+      }
+      if (resultProducts.ok) {
+        setProducts(resultProducts.products);
       }
     };
     getData();
-  }, [setInventory]);
+  }, [setInventory, setProducts]);
   return (
     <>
       <Typography variant="h3" color="primary" align="center">
