@@ -6,6 +6,7 @@ import { AdminContext } from "../../context/AdminContext";
 import { Loading } from "../../components/Others/Loading";
 import { EmptyInfo } from "../../components/Others/EmptyInfo";
 import { getInventoryApi } from "../../api/inventory";
+import { InputSearchInventario } from "../../components/Admin/Inventario/InputSearchInventario";
 
 export const Inventario = () => {
   const { inventory, setInventory } = useContext(AdminContext);
@@ -28,13 +29,17 @@ export const Inventario = () => {
           <Loading variantMessage="h5" message="Cargando inventario..." />
         ) : inventory.length > 0 ? (
           <>
+            <InputSearchInventario />
             <h2>Hola 2</h2>
           </>
         ) : (
-          <EmptyInfo
-            title="No hay registros de inventario aún"
-            variantMessage="h4"
-          />
+          <>
+            <InputSearchInventario />
+            <EmptyInfo
+              title="No hay registros de inventario aún"
+              variantMessage="h4"
+            />
+          </>
         )}
       </Container>
     </>
