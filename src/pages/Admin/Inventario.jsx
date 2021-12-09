@@ -28,7 +28,7 @@ export const Inventario = () => {
   return (
     <>
       <Typography variant="h3" color="primary" align="center">
-        Módulo de Productos
+        Módulo de Inventario
       </Typography>
       <Container component="div" maxWidth="lg">
         {!inventory ? (
