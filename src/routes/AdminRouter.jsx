@@ -6,6 +6,7 @@ import { Error404 } from "../pages/Error404";
 import { Proveedores } from "../pages/Admin/Proveedores";
 import { Productos } from "../pages/Admin/Productos";
 import { AdminProvider } from "../context/AdminContext";
+import { Inventario } from "../pages/Admin/Inventario";
 
 export const AdminRouter = () => {
   return (
@@ -16,7 +17,7 @@ export const AdminRouter = () => {
           <Route exact path="/admin/categorias" component={Categorias} />
           <Route exact path="/admin/proveedores" component={Proveedores} />
           <Route exact path="/admin/productos" component={Productos} />
-          <Route exact path="/admin/inventario" component={Categorias} />
+          <Route exact path="/admin/inventario" component={Inventario} />
           <Route exact path="/admin/ventas" component={Categorias} />
           <Route exact path="/admin/estadisticas" component={Categorias} />
           <Route component={Error404} />
