@@ -49,7 +49,7 @@ export const Productos = () => {
           <>
             <InputSearchProducto />
             <EmptyInfo
-              title="No registros de productos aún"
+              title="No hay registros de productos aún"
               variantMessage="h4"
             />
           </>
