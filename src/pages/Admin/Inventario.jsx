@@ -7,6 +7,7 @@ import { Loading } from "../../components/Others/Loading";
 import { EmptyInfo } from "../../components/Others/EmptyInfo";
 import { getInventoryApi } from "../../api/inventory";
 import { InputSearchInventario } from "../../components/Admin/Inventario/InputSearchInventario";
+import { TableInventario } from "../../components/Admin/Inventario/TableInventario";
 
 export const Inventario = () => {
   const { inventory, setInventory } = useContext(AdminContext);
@@ -30,7 +31,7 @@ export const Inventario = () => {
         ) : inventory.length > 0 ? (
           <>
             <InputSearchInventario />
-            <h2>Hola 2</h2>
+            <TableInventario />
           </>
         ) : (
           <>
