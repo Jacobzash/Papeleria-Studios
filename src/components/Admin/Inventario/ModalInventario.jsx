@@ -9,6 +9,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { FormInventario } from "./FormInventario";
+import { AdminContext } from "../../../context/AdminContext";
+import { createInventoryApi, updateInventoryApi } from "../../../api/inventory";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -33,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ModalInventario = ({ open, setOpen, mode, data }) => {
+  const [dataInventario, setDataInventario] = useState(data);
+  const { inventory, setInventory } = useContext(AdminContext);
   const { register, handleSubmit, errors, reset } = useForm();
   const classes = useStyles();
   const handleClose = () => {
@@ -40,6 +45,30 @@ export const ModalInventario = ({ open, setOpen, mode, data }) => {
   };
   const onSubmit = async (_, e) => {
     e.preventDefault();
+    if (mode === "edit") {
+      const result = await updateInventoryApi(dataInventario);
+      if (result.ok) {
+        handleClose();
+        setInventory(
+          inventory.map((item) => {
+            if (item.id === result.inventory.id) {
+              setDataInventario(result.inventory);
+              return result.inventory;
+            }
+            return item;
+          })
+        );
+        Swal.fire(result.msg, "", "success");
+      }
+    } else {
+      const result = await createInventoryApi(dataInventario);
+      if (result.ok) {
+        handleClose();
+        setInventory([result.inventory, ...inventory]);
+        Swal.fire(result.msg, "", "success");
+      }
+    }
+    reset();
   };
   return (
     <div>
@@ -54,7 +83,7 @@ export const ModalInventario = ({ open, setOpen, mode, data }) => {
             <div id="Producto" className={classes.containerTitle}>
               <Typography variant="h6" className={classes.titleProduct}>
                 {mode === "edit"
-                  ? `Editando el inventario ${data.nom_produc}`
+                  ? `Editando el inventario de ${data.Producto.nom_produc}`
                   : "Crear un inventario"}
               </Typography>
             </div>
@@ -64,11 +93,13 @@ export const ModalInventario = ({ open, setOpen, mode, data }) => {
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <DialogContent dividers>
-              {/* <FormProducto
+              <FormInventario
                 mode={mode}
                 register={register}
                 errors={errors}
-              /> */}
+                dataInventario={dataInventario}
+                setDataInventario={setDataInventario}
+              />
             </DialogContent>
             <DialogActions className={classes.actions}>
               <Button
