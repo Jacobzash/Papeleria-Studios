@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { createProductApi, updateProductApi } from "../../../api/product";
 import { AdminContext } from "../../../context/AdminContext";
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
