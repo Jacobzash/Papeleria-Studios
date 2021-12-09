@@ -47,8 +47,8 @@ export const ModalInventario = ({ open, setOpen, mode, data }) => {
     e.preventDefault();
     if (mode === "edit") {
       const result = await updateInventoryApi(dataInventario);
+      handleClose();
       if (result.ok) {
-        handleClose();
         setInventory(
           inventory.map((item) => {
             if (item.id === result.inventory.id) {
@@ -59,13 +59,17 @@ export const ModalInventario = ({ open, setOpen, mode, data }) => {
           })
         );
         Swal.fire(result.msg, "", "success");
+      } else {
+        Swal.fire(result.msg, "", "error");
       }
     } else {
       const result = await createInventoryApi(dataInventario);
+      handleClose();
       if (result.ok) {
-        handleClose();
         setInventory([result.inventory, ...inventory]);
         Swal.fire(result.msg, "", "success");
+      } else {
+        Swal.fire(result.msg, "", "error");
       }
     }
     reset();
