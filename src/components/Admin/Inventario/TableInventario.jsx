@@ -9,6 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 import { AdminContext } from "../../../context/AdminContext";
+import { ButtonEditInventario } from "./ButtonEditInventario";
+import { ButtonDeleteInventario } from "./ButtonDeleteInventario";
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -66,10 +68,10 @@ export const TableInventario = () => {
               <TableCell align="left">{item.Producto.nom_produc}</TableCell>
               <TableCell align="left">{item.can_total}</TableCell>
               <TableCell align="left">
-                {/* <ButtonEditProducto data={item} /> */}
+                <ButtonEditInventario data={item} />
               </TableCell>
               <TableCell align="left">
-                {/* <ButtonDeleteProducto data={item} /> */}
+                <ButtonDeleteInventario data={item} />
               </TableCell>
             </TableRow>
           ))}
