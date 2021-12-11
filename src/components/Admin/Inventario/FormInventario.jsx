@@ -74,6 +74,10 @@ export const FormInventario = ({
               value: true,
               message: "La cantidad disponible del producto es requerida",
             },
+            min: {
+              value: 1,
+              message: "La cantidad disponible del producto debe ser mayor a 0",
+            },
           })}
         />
         <Typography variant="body1" display="block" color="error" gutterBottom>
