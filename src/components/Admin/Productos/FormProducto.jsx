@@ -174,6 +174,10 @@ export const FormProducto = ({
               value: true,
               message: "El precio del producto es requerido",
             },
+            min: {
+              value: 1,
+              message: "El precio del producto debe ser mayor a 0",
+            },
           })}
         />
         <Typography variant="body1" display="block" color="error" gutterBottom>
