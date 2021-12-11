@@ -19,7 +19,7 @@ export const Ventas = () => {
     getData();
   }, [setInventory]);
   return (
-    <div>
+    <>
       <Typography variant="h3" color="primary" align="center">
         Modulo de Ventas
       </Typography>
@@ -38,6 +38,6 @@ export const Ventas = () => {
           />
         )}
       </Container>
-    </div>
+    </>
   );
 };
