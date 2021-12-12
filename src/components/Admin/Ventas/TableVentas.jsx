@@ -14,6 +14,7 @@ import { Typography } from "@material-ui/core";
 import { createOrderApi } from "../../../api/order";
 import { AdminContext } from "../../../context/AdminContext";
 import { getInventoryWithStockApi } from "../../../api/inventory";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -83,6 +84,7 @@ export const TableVentas = ({ ventas, setVentas }) => {
     if (resultOrder.ok) {
       setVentas([]);
       setDataVentas([]);
+      Swal.fire(resultOrder.msg, "", "success");
     }
     setTimeout(async () => {
       const resultInventory = await getInventoryWithStockApi();
