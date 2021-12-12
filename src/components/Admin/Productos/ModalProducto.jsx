@@ -48,7 +48,6 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
 
   const onSubmit = async (_, e) => {
     e.preventDefault();
-    console.log(e);
     if (mode === "edit") {
       const result = await updateProductApi(dataProducto, changeImage);
       if (result.ok) {

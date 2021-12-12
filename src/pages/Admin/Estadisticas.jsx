@@ -9,7 +9,6 @@ export const Estadisticas = () => {
     endDate: new Date(),
   });
   const [statistics, setStatistics] = useState(null);
-  console.log(statistics);
   return (
     <>
       <Typography variant="h3" color="primary" align="center" gutterBottom>
