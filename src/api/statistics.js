@@ -5,7 +5,6 @@ import { apiVersion, basePath } from "./config";
 const urlBase = `${basePath}/${apiVersion}/statistics`;
 
 export const getStatistics = async (startDate, endDate) => {
-  console.log(startDate, endDate);
   const url = `${urlBase}`;
   const token = getToken();
   const headers = {
