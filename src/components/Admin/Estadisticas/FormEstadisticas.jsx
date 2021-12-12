@@ -5,8 +5,10 @@ import { KeyboardDateTimePicker } from "@material-ui/pickers";
 import { useForm } from "react-hook-form";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
+import { getStatistics } from "../../../api/statistics";
+import { Button } from "@material-ui/core";
 
-export const FormEstadisticas = ({ dates, setDates }) => {
+export const FormEstadisticas = ({ dates, setDates, setStatistics }) => {
   const { register, errors, handleSubmit } = useForm();
   const handleDateChange = (data, property) => {
     setDates({
@@ -14,7 +16,7 @@ export const FormEstadisticas = ({ dates, setDates }) => {
       [property]: data,
     });
   };
-  const onSubmit = (_, e) => {
+  const onSubmit = async (_, e) => {
     e.preventDefault();
     const startDate = format(dates.startDate, "yyyy-MM-dd HH:mm:ss");
     const endDate = format(dates.endDate, "yyyy-MM-dd HH:mm:ss");
@@ -24,17 +26,20 @@ export const FormEstadisticas = ({ dates, setDates }) => {
         "La fecha de inicio no puede ser mayor a la fecha de fin, por favor verifique.",
         "error"
       );
+    } else {
+      const response = await getStatistics(startDate, endDate);
+      setStatistics(response.data);
+      console.log(response);
     }
-    console.log(startDate);
-    console.log(endDate);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid
         container
         direction="row"
-        justifyContent="space-between"
+        justifyContent="center"
         alignItems="center"
+        spacing={2}
       >
         <Grid item>
           <KeyboardDateTimePicker
@@ -90,8 +95,19 @@ export const FormEstadisticas = ({ dates, setDates }) => {
             {errors?.endDate?.message}
           </Typography>
         </Grid>
+        <Grid item>
+          <Button
+            type="submit"
+            fullWidth={true}
+            size="large"
+            variant="contained"
+            color="primary"
+            style={{ marginBottom: "1rem" }}
+          >
+            Generar estadísticas
+          </Button>
+        </Grid>
       </Grid>
-      <button type="submit">Guardar</button>
     </form>
   );
 };
