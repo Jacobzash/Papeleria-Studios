@@ -18,6 +18,7 @@ import EqualizerIcon from "@material-ui/icons/Equalizer";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import AppsIcon from "@material-ui/icons/Apps";
 import PersonIcon from "@material-ui/icons/Person";
+import ListIcon from "@material-ui/icons/List";
 import { AuthContext } from "../../context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -91,6 +92,12 @@ export const ListMenu = ({ handleDrawerClose }) => {
         </List>
       </Collapse>
       <Divider />
+      <ListMenuItem
+        route="/productos"
+        handleDrawerClose={handleDrawerClose}
+        icon={<ListIcon />}
+        text="Productos"
+      />
       <Link to="/login" onClick={logout}>
         <ListItem button onClick={handleDrawerClose}>
           <ListItemIcon>
