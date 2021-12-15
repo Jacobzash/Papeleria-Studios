@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   main: {
     padding: theme.spacing(0, 2),
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(10),
     minHeight: "100%",
   },
 }));
