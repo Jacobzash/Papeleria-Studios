@@ -45,7 +45,7 @@ export const NavegacionFooter = () => {
             <></>
           ) : (
             <ListItem>
-              <Link to="/" className={classes.link}>
+              <Link to="/login" className={classes.link}>
                 <PersonIcon />
                 <Typography variant="body1">Login</Typography>
               </Link>
