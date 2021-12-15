@@ -57,6 +57,9 @@ export const Dashboard = () => {
           </Hidden>
           <Hidden smDown>
             <div>
+              <Link to="/productos">
+                <Button color="inherit">Productos</Button>
+              </Link>
               <Link to="/admin">
                 <Button color="inherit">Panel</Button>
               </Link>
