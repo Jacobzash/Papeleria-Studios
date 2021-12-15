@@ -22,6 +22,22 @@ export const getProductsApi = async () => {
     }
   }
 };
+export const getProductsForUserApi = async () => {
+  const url = `${urlBase}/products`;
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  try {
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    } else {
+      return error.message;
+    }
+  }
+};
 export const createProductApi = async ({
   nom_produc: nombre,
   valor_unitario: precio,
