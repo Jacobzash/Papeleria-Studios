@@ -1,12 +1,10 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+import { Carousel } from "../components/Home/Carousel";
 
 export const Home = () => {
   return (
     <>
-      <Typography variant="h2" color="initial">
-        Home
-      </Typography>
+      <Carousel />
     </>
   );
 };
