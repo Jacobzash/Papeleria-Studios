@@ -22,3 +22,19 @@ export const getStatistics = async (startDate, endDate) => {
     }
   }
 };
+export const getProductsMostSelledApi = async () => {
+  const url = `${urlBase}/productsmostselled`;
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  try {
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    } else {
+      return error.message;
+    }
+  }
+};
