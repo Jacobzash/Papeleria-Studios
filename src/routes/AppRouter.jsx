@@ -18,6 +18,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { Error404 } from "../pages/Error404";
 import { AuthContext } from "../context/AuthContext";
+import { Productos } from "../pages/Productos";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,6 +56,13 @@ export const AppRouter = () => {
               exact
               path="/"
               component={Home}
+            />
+            <PublicRoute
+              isLoggedIn={auth.logged}
+              restricted={false}
+              exact
+              path="/productos"
+              component={Productos}
             />
             <PublicRoute
               isLoggedIn={auth.logged}
