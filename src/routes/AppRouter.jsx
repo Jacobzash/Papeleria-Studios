@@ -20,6 +20,8 @@ import { Error404 } from "../pages/Error404";
 import { AuthContext } from "../context/AuthContext";
 import { Productos } from "../pages/Productos";
 
+import { Loading } from "../components/Others/Loading";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -41,7 +43,7 @@ export const AppRouter = () => {
     checkToken();
     //eslint-disable-next-line
   }, []);
-  if (auth.loading) return <div>Loading...</div>;
+  if (auth.loading) return <Loading />;
   return (
     <Router>
       <ScrollToTop />

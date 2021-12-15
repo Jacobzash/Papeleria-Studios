@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     width: 48,
+    height: 48,
   },
 }));
 
