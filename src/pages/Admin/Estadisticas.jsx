@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import { FormEstadisticas } from "../../components/Admin/Estadisticas/FormEstadisticas";
 import { ListEstadisticias } from "../../components/Admin/Estadisticas/ListEstadisticias";
+import Container from "@material-ui/core/Container";
 
 export const Estadisticas = () => {
   const [dates, setDates] = useState({
@@ -14,7 +15,7 @@ export const Estadisticas = () => {
       <Typography variant="h3" color="primary" align="center" gutterBottom>
         Modulo de Estadísticas
       </Typography>
-      <div>
+      <Container style={{ maxWidth: 1600 }}>
         <Typography variant="h5" color="initial" align="center" gutterBottom>
           Seleccione el intervalo de fechas para generar las estadísticas
         </Typography>
@@ -29,7 +30,7 @@ export const Estadisticas = () => {
             setStatistics={setStatistics}
           />
         )}
-      </div>
+      </Container>
     </>
   );
 };
