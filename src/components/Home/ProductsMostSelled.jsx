@@ -59,6 +59,8 @@ export const ProductsMostSelled = () => {
       <Grid container justifyContent="center" spacing={2}>
         {!products ? (
           <Loading />
+        ) : products.length === 0 ? (
+          <></>
         ) : (
           products.map((item, i) => {
             return (
