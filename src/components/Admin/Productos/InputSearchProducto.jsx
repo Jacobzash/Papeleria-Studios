@@ -7,14 +7,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import { AddProducto } from "./AddProducto";
 
 export const InputSearchProducto = () => {
-  const [input, setInput] = useState({
-    search: "",
-  });
+  const [input, setInput] = useState("");
   const handleChange = ({ target }) => {
-    setInput({
-      ...input,
-      [target.name]: target.value,
-    });
+    setInput(target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +30,7 @@ export const InputSearchProducto = () => {
             margin="normal"
             name="search"
             onChange={handleChange}
-            value={input.search}
+            value={input}
             fullWidth
             variant="outlined"
             InputProps={{
