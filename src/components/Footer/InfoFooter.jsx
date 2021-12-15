@@ -17,7 +17,7 @@ export const InfoFooter = () => {
   return (
     <>
       <Typography variant="h5" className={classes.white}>
-        Papelería Studios
+        Papelería Estudios
       </Typography>
       <Typography variant="body2" className={classes.white}>
         Tu papelería de confianza, con variedad de productos y una atención

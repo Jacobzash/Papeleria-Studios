@@ -37,7 +37,7 @@ export const Header = () => {
         <Toolbar className={classes.toolbar}>
           <Link to="/">
             <Typography variant="h6" className={classes.title}>
-              Papeleria Studios
+              Papeleria Estudios
             </Typography>
           </Link>
           <Hidden mdUp>

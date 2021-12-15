@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 const data = [
   {
     id: 1,
-    title: "Papelería Studios",
+    title: "Papelería Estudios",
     img: MainImg,
     position: "top",
   },

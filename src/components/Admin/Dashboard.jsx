@@ -43,7 +43,7 @@ export const Dashboard = () => {
         <Toolbar className={classes.toolBar}>
           <Link to="/">
             <Typography variant="h6" className={classes.title}>
-              Papeleria Studios
+              Papeleria Estudios
             </Typography>
           </Link>
           <Hidden mdUp>

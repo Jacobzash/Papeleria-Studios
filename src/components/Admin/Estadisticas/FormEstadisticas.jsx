@@ -29,7 +29,6 @@ export const FormEstadisticas = ({ dates, setDates, setStatistics }) => {
     } else {
       const response = await getStatistics(startDate, endDate);
       setStatistics(response.data);
-      console.log(response);
     }
   };
   return (
