@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import { AddProducto } from "./AddProducto";
+import { AdminContext } from "../../../context/AdminContext";
 
 export const InputSearchProducto = () => {
+  const { products, setProducts } = useContext(AdminContext);
+  const [local] = useState(products);
   const [input, setInput] = useState("");
   const handleChange = ({ target }) => {
     setInput(target.value);
+    if (target.value === "") {
+      setProducts(local);
+    } else {
+      setProducts(
+        local.filter((product) =>
+          product.nom_produc.toLowerCase().includes(target.value.toLowerCase())
+        )
+      );
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
