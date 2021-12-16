@@ -7,7 +7,7 @@ import { deleteProviderApi } from "../../../api/provider";
 import { AdminContext } from "../../../context/AdminContext";
 
 export const ButtonDeleteProveedor = ({ data }) => {
-  const { providers, setProviders } = useContext(AdminContext);
+  const { providers, setProviders, setTmp, tmp } = useContext(AdminContext);
 
   const handleClick = async () => {
     const result = await Swal.fire({
@@ -25,6 +25,7 @@ export const ButtonDeleteProveedor = ({ data }) => {
       if (response.ok) {
         Swal.fire(response.msg, "", "success");
         setProviders(providers.filter((prov) => prov.id !== data.id));
+        setTmp(tmp.filter((prov) => prov.id !== data.id));
       }
     }
   };

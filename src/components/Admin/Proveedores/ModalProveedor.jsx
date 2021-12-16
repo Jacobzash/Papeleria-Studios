@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export const ModalProveedor = ({ open, setOpen, mode, data }) => {
   const { register, handleSubmit, errors } = useForm();
   const [dataProveedor, setDataProveedor] = useState(data);
-  const { providers, setProviders } = useContext(AdminContext);
+  const { providers, setProviders, setTmp, tmp } = useContext(AdminContext);
 
   const classes = useStyles();
   const handleClose = () => {
@@ -46,6 +46,14 @@ export const ModalProveedor = ({ open, setOpen, mode, data }) => {
             return prov;
           })
         );
+        setTmp(
+          tmp.map((prov) => {
+            if (prov.id === result.provider.id) {
+              return result.provider;
+            }
+            return prov;
+          })
+        );
         Swal.fire(result.msg, "", "success");
       }
     } else {
@@ -54,6 +62,7 @@ export const ModalProveedor = ({ open, setOpen, mode, data }) => {
         handleClose();
         const provider = result.provider;
         setProviders([provider, ...providers]);
+        setTmp([provider, ...tmp]);
         Swal.fire(result.msg, "", "success");
       }
     }
