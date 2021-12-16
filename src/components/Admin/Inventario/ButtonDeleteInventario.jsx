@@ -7,7 +7,7 @@ import { AdminContext } from "../../../context/AdminContext";
 import { deleteInventoryApi } from "../../../api/inventory";
 
 export const ButtonDeleteInventario = ({ data }) => {
-  const { inventory, setInventory } = useContext(AdminContext);
+  const { inventory, setInventory, tmp, setTmp } = useContext(AdminContext);
 
   const handleClick = async () => {
     const result = await Swal.fire({
@@ -25,6 +25,7 @@ export const ButtonDeleteInventario = ({ data }) => {
       if (response.ok) {
         Swal.fire(response.msg, "", "success");
         setInventory(inventory.filter((item) => item.id !== data.id));
+        setTmp(tmp.filter((item) => item.id !== data.id));
       }
     }
   };

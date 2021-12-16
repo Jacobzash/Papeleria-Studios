@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ModalInventario = ({ open, setOpen, mode, data }) => {
   const [dataInventario, setDataInventario] = useState(data);
-  const { inventory, setInventory } = useContext(AdminContext);
+  const { inventory, setInventory, tmp, setTmp } = useContext(AdminContext);
   const { register, handleSubmit, errors, reset } = useForm();
   const classes = useStyles();
   const handleClose = () => {
@@ -58,6 +58,15 @@ export const ModalInventario = ({ open, setOpen, mode, data }) => {
             return item;
           })
         );
+        setTmp(
+          tmp.map((item) => {
+            if (item.id === result.inventory.id) {
+              setDataInventario(result.inventory);
+              return result.inventory;
+            }
+            return item;
+          })
+        );
         Swal.fire(result.msg, "", "success");
       } else {
         Swal.fire(result.msg, "", "error");
@@ -67,6 +76,7 @@ export const ModalInventario = ({ open, setOpen, mode, data }) => {
       handleClose();
       if (result.ok) {
         setInventory([result.inventory, ...inventory]);
+        setTmp(result.category, ...tmp);
         Swal.fire(result.msg, "", "success");
       } else {
         Swal.fire(result.msg, "", "error");
