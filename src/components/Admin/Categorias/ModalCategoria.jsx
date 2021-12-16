@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const ModalCategoria = ({ open, setOpen, mode, data }) => {
   const [dataCategoria, setDataCategoria] = useState(data);
-  const { categories, setCategories } = useContext(AdminContext);
+  const { categories, setCategories, tmp, setTmp } = useContext(AdminContext);
   const { register, handleSubmit, errors } = useForm();
 
   const classes = useStyles();
@@ -43,6 +43,14 @@ export const ModalCategoria = ({ open, setOpen, mode, data }) => {
             return cat;
           })
         );
+        setTmp(
+          tmp.map((cat) => {
+            if (cat.id === result.category.id) {
+              return result.category;
+            }
+            return cat;
+          })
+        );
         Swal.fire(result.msg, "", "success");
       }
     } else {
@@ -51,6 +59,7 @@ export const ModalCategoria = ({ open, setOpen, mode, data }) => {
         handleClose();
         const category = result.category;
         setCategories([category, ...categories]);
+        setTmp([category, ...tmp]);
         Swal.fire(result.msg, "", "success");
       }
     }

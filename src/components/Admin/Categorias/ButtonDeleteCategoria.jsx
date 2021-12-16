@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { AdminContext } from "../../../context/AdminContext";
 
 export const ButtonDeleteCategoria = ({ data }) => {
-  const { categories, setCategories } = useContext(AdminContext);
+  const { categories, setCategories, tmp, setTmp } = useContext(AdminContext);
   const handleClick = async () => {
     const result = await Swal.fire({
       title: `¿Está seguro de borrar la categoria ${data.nom_cat}?`,
@@ -24,6 +24,7 @@ export const ButtonDeleteCategoria = ({ data }) => {
       if (response.ok) {
         Swal.fire(response.msg, "", "success");
         setCategories(categories.filter((category) => category.id !== data.id));
+        setTmp(tmp.filter((category) => category.id !== data.id));
       }
     }
   };

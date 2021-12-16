@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import { AddCategoria } from "./AddCategoria";
+import { AdminContext } from "../../../context/AdminContext";
 
 export const InputSearchCategoria = () => {
-  const [input, setInput] = useState({
-    search: "",
-  });
+  const { categories, setCategories, tmp, setTmp } = useContext(AdminContext);
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    setTmp(categories);
+    // eslint-disable-next-line
+  }, []);
+
   const handleChange = ({ target }) => {
-    setInput({
-      ...input,
-      [target.name]: target.value,
-    });
+    setInput(target.value);
+    if (target.value === "") {
+      setCategories(tmp);
+    } else {
+      setCategories(
+        tmp.filter((category) =>
+          category.nom_cat.toLowerCase().includes(target.value.toLowerCase())
+        )
+      );
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +47,7 @@ export const InputSearchCategoria = () => {
             margin="normal"
             name="search"
             onChange={handleChange}
-            value={input.search}
+            value={input}
             fullWidth
             variant="outlined"
             InputProps={{
