@@ -7,6 +7,7 @@ export const AdminProvider = ({ children }) => {
   const [categories, setCategories] = useState();
   const [products, setProducts] = useState();
   const [inventory, setInventory] = useState();
+  const [tmp, setTmp] = useState();
 
   return (
     <AdminContext.Provider
@@ -19,6 +20,8 @@ export const AdminProvider = ({ children }) => {
         setProducts,
         inventory,
         setInventory,
+        tmp,
+        setTmp,
       }}
     >
       {children}
