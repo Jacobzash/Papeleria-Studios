@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ModalProducto = ({ open, setOpen, mode, data }) => {
   const [dataProducto, setDataProducto] = useState(data);
-  const { products, setProducts } = useContext(AdminContext);
+  const { products, setProducts, tmp, setTmp } = useContext(AdminContext);
   const { register, handleSubmit, errors, reset } = useForm();
   const [changeImage, setChangeImage] = useState(false);
   const classes = useStyles();
@@ -61,6 +61,14 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
             return product;
           })
         );
+        setTmp(
+          tmp.map((product) => {
+            if (product.id === result.product.id) {
+              return result.product;
+            }
+            return product;
+          })
+        );
         Swal.fire(result.msg, "", "success");
       }
     } else {
@@ -69,6 +77,7 @@ export const ModalProducto = ({ open, setOpen, mode, data }) => {
         handleClose();
         const product = result.product;
         setProducts([product, ...products]);
+        setTmp([product, ...tmp]);
         Swal.fire(result.msg, "", "success");
       }
     }

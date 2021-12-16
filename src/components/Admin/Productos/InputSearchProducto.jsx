@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -8,16 +8,21 @@ import { AddProducto } from "./AddProducto";
 import { AdminContext } from "../../../context/AdminContext";
 
 export const InputSearchProducto = () => {
-  const { products, setProducts } = useContext(AdminContext);
-  const [local] = useState(products);
+  const { products, setProducts, tmp, setTmp } = useContext(AdminContext);
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    setTmp(products);
+    // eslint-disable-next-line
+  }, []);
+
   const handleChange = ({ target }) => {
     setInput(target.value);
     if (target.value === "") {
-      setProducts(local);
+      setProducts(tmp);
     } else {
       setProducts(
-        local.filter((product) =>
+        tmp.filter((product) =>
           product.nom_produc.toLowerCase().includes(target.value.toLowerCase())
         )
       );
