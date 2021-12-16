@@ -9,11 +9,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import { ButtonDeleteProducto } from "../Productos/ButtonDeleteProducto";
 import { Typography } from "@material-ui/core";
 import { createOrderApi } from "../../../api/order";
 import { AdminContext } from "../../../context/AdminContext";
 import { getInventoryWithStockApi } from "../../../api/inventory";
+import { ButtonDeleteVentas } from "./ButtonDeleteVentas";
 import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +48,6 @@ export const TableVentas = ({ ventas, setVentas }) => {
   const classes = useStyles();
   const { setInventory } = useContext(AdminContext);
   const [dataVentas, setDataVentas] = useState([]);
-
   useEffect(() => {
     setDataVentas(
       ventas.map((venta) => {
@@ -160,7 +159,11 @@ export const TableVentas = ({ ventas, setVentas }) => {
                   {"$" + venta.Producto.valor_unitario * venta.cantidad}
                 </TableCell>
                 <TableCell align="left">
-                  <ButtonDeleteProducto data={venta} />
+                  <ButtonDeleteVentas
+                    data={venta}
+                    setVentas={setVentas}
+                    ventas={ventas}
+                  />
                 </TableCell>
               </TableRow>
             ))}
