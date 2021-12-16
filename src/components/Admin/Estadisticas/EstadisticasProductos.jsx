@@ -48,7 +48,7 @@ export const EstadisticasProductos = ({ data }) => {
             <>
               <Grid item xs={12} md={6} lg={4} className={classes.heightItems}>
                 <Typography variant="h6" gutterBottom align="center">
-                  Productos más vendidos
+                  Productos que generan más ingresos
                 </Typography>
                 <BarStatistics
                   data={PMostSelled}
@@ -59,7 +59,7 @@ export const EstadisticasProductos = ({ data }) => {
               </Grid>
               <Grid item xs={12} md={6} lg={4} className={classes.heightItems}>
                 <Typography variant="h6" gutterBottom align="center">
-                  Productos menos vendidos
+                  Productos que generan menos ingresos
                 </Typography>
                 <BarStatistics
                   data={PLessSelled}
