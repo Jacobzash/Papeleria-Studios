@@ -95,8 +95,8 @@ export default function FormLogin() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Inicia sesión
+        <Typography component="h1" variant="h5" align="center">
+          Inicia sesión como administrador
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
@@ -162,10 +162,6 @@ export default function FormLogin() {
           >
             {errors?.password?.message}
           </Typography>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="secondary" />}
-            label="Recordarme"
-          />
           <Button
             type="submit"
             fullWidth

@@ -4,7 +4,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { AdminContext } from "../../../context/AdminContext";
 
 export const InputSearchVentas = ({ ventas, setVentas }) => {
-  const { inventory, setInventory, tmp, setTmp } = useContext(AdminContext);
+  const { inventory, setInventory, setTmp } = useContext(AdminContext);
   useEffect(() => {
     setTmp(inventory);
     // eslint-disable-next-line

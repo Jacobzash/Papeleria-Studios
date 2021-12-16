@@ -51,9 +51,14 @@ export const Header = () => {
             </IconButton>
           </Hidden>
           <Hidden smDown>
-            <Link to="/productos">
-              <Button color="inherit">Productos</Button>
-            </Link>
+            <div>
+              <Link to="/productos">
+                <Button color="inherit">Productos</Button>
+              </Link>
+              <Link to="/login">
+                <Button color="inherit">Iniciar Sesión</Button>
+              </Link>
+            </div>
           </Hidden>
         </Toolbar>
       </AppBar>

@@ -41,7 +41,6 @@ export const ProductsMostSelled = () => {
     const getData = async () => {
       const response2 = await getProductsMostSelledApi();
       setProducts(response2.data);
-      console.log(response2.data);
     };
     getData();
   }, []);
